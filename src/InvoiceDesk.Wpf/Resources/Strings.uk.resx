@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Partial translation on purpose: keys missing here fall back to English. -->
+
+  <data name="Nav_Dashboard" xml:space="preserve">
+    <value>Панель</value>
+  </data>
+  <data name="Nav_Invoices" xml:space="preserve">
+    <value>Рахунки</value>
+  </data>
+  <data name="Nav_Clients" xml:space="preserve">
+    <value>Клієнти</value>
+  </data>
+  <data name="Nav_Services" xml:space="preserve">
+    <value>Послуги</value>
+  </data>
+  <data name="Nav_Payments" xml:space="preserve">
+    <value>Платежі</value>
+  </data>
+  <data name="Nav_Reports" xml:space="preserve">
+    <value>Звіти</value>
+  </data>
+  <data name="Nav_Settings" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+
+  <data name="Shell_SearchPlaceholder" xml:space="preserve">
+    <value>Пошук клієнтів і рахунків</value>
+  </data>
+  <data name="Shell_NewInvoice" xml:space="preserve">
+    <value>Новий рахунок</value>
+  </data>
+  <data name="Shell_SwitchTheme" xml:space="preserve">
+    <value>Змінити тему</value>
+  </data>
+  <data name="Shell_LocalDatabase" xml:space="preserve">
+    <value>Локальна база даних</value>
+  </data>
+  <data name="Shell_BackupStatus" xml:space="preserve">
+    <value>Резервна копія: сьогодні {0}</value>
+  </data>
+  <data name="Shell_Minimize" xml:space="preserve">
+    <value>Згорнути</value>
+  </data>
+  <data name="Shell_Maximize" xml:space="preserve">
+    <value>Розгорнути</value>
+  </data>
+  <data name="Shell_Restore" xml:space="preserve">
+    <value>Відновити</value>
+  </data>
+  <data name="Shell_Close" xml:space="preserve">
+    <value>Закрити</value>
+  </data>
+
+  <data name="Dashboard_RevenueForMonth" xml:space="preserve">
+    <value>Дохід, {0}</value>
+  </data>
+  <data name="Dashboard_Outstanding" xml:space="preserve">
+    <value>Не оплачено</value>
+  </data>
+  <data name="Dashboard_Overdue" xml:space="preserve">
+    <value>Прострочено</value>
+  </data>
+  <data name="Dashboard_Clients" xml:space="preserve">
+    <value>Клієнтів</value>
+  </data>
+  <data name="Dashboard_RevenueByMonth" xml:space="preserve">
+    <value>Дохід за місяцями</value>
+  </data>
+  <data name="Dashboard_Summary" xml:space="preserve">
+    <value>Клієнтів: {0}, рахунків: {1}</value>
+  </data>
+
+  <data name="Column_Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="Column_Client" xml:space="preserve">
+    <value>Клієнт</value>
+  </data>
+  <data name="Column_Due" xml:space="preserve">
+    <value>Термін</value>
+  </data>
+  <data name="Column_Total" xml:space="preserve">
+    <value>Сума</value>
+  </data>
+  <data name="Column_Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+
+  <data name="Status_Draft" xml:space="preserve">
+    <value>Чернетка</value>
+  </data>
+  <data name="Status_Sent" xml:space="preserve">
+    <value>Надіслано</value>
+  </data>
+  <data name="Status_PartiallyPaid" xml:space="preserve">
+    <value>Частково оплачено</value>
+  </data>
+  <data name="Status_Paid" xml:space="preserve">
+    <value>Оплачено</value>
+  </data>
+  <data name="Status_Overdue" xml:space="preserve">
+    <value>Прострочено</value>
+  </data>
+
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>Вигляд</value>
+  </data>
+  <data name="Settings_AppearanceHint" xml:space="preserve">
+    <value>Застосовується одразу, перезапуск не потрібен.</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="Settings_ThemeHint" xml:space="preserve">
+    <value>Вікно та елементи керування</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Світла</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Темна</value>
+  </data>
+  <data name="Theme_System" xml:space="preserve">
+    <value>Системна</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+  <data name="Settings_LanguageHint" xml:space="preserve">
+    <value>Мова інтерфейсу</value>
+  </data>
+  <data name="Language_System" xml:space="preserve">
+    <value>Системна</value>
+  </data>
+  <data name="Settings_LanguageSystemHint" xml:space="preserve">
+    <value>Береться з мови Windows; якщо її немає — англійська.</value>
+  </data>
+  <data name="Settings_Storage" xml:space="preserve">
+    <value>Сховище</value>
+  </data>
+  <data name="Settings_StorageHint" xml:space="preserve">
+    <value>Де застосунок читає та записує файли на цьому компʼютері.</value>
+  </data>
+  <data name="Settings_Reports" xml:space="preserve">
+    <value>Звіти та експорт</value>
+  </data>
+  <data name="Settings_ReportsHint" xml:space="preserve">
+    <value>PDF, Excel, CSV</value>
+  </data>
+  <data name="Settings_Attachments" xml:space="preserve">
+    <value>Вкладення</value>
+  </data>
+  <data name="Settings_AttachmentsHint" xml:space="preserve">
+    <value>Файли, привʼязані до рахунків</value>
+  </data>
+  <data name="Settings_Backups" xml:space="preserve">
+    <value>Резервні копії</value>
+  </data>
+  <data name="Settings_BackupsHint" xml:space="preserve">
+    <value>Знімки бази даних</value>
+  </data>
+  <data name="Settings_AfterExport" xml:space="preserve">
+    <value>Після експорту</value>
+  </data>
+  <data name="Settings_AfterExportHint" xml:space="preserve">
+    <value>Коли файл записано</value>
+  </data>
+  <data name="Settings_AskWhereToSave" xml:space="preserve">
+    <value>Питати, куди зберігати кожен файл</value>
+  </data>
+  <data name="Settings_OpenFolderAfterExport" xml:space="preserve">
+    <value>Відкривати теку після експорту</value>
+  </data>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Обрати теку</value>
+  </data>
+  <data name="Settings_OpenFolder" xml:space="preserve">
+    <value>Відкрити в Провіднику</value>
+  </data>
+  <data name="Settings_ResetDefaults" xml:space="preserve">
+    <value>Скинути до типових</value>
+  </data>
+  <data name="Settings_Save" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="Settings_SavedAt" xml:space="preserve">
+    <value>Збережено о {0}</value>
+  </data>
+  <data name="Settings_UnsavedChanges" xml:space="preserve">
+    <value>Є незбережені зміни</value>
+  </data>
+  <data name="Settings_FolderMissing" xml:space="preserve">
+    <value>Такої теки ще немає. Її буде створено під час збереження.</value>
+  </data>
+</root>

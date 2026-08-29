@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/InvoiceDesk.Domain/InvoiceDesk.Domain.csproj" />
+    <Project Path="src/InvoiceDesk.Wpf/InvoiceDesk.Wpf.csproj" />
+  </Folder>
+</Solution>

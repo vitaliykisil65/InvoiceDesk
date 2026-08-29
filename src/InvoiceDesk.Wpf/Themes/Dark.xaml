@@ -1,0 +1,30 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Surfaces -->
+    <SolidColorBrush x:Key="SurfacePageBrush" Color="#141416" />
+    <SolidColorBrush x:Key="SurfaceCardBrush" Color="#1D1D20" />
+    <SolidColorBrush x:Key="SurfaceMutedBrush" Color="#232327" />
+    <SolidColorBrush x:Key="SurfaceHoverBrush" Color="#2B2B30" />
+
+    <!-- Lines -->
+    <SolidColorBrush x:Key="BorderSubtleBrush" Color="#2E2E33" />
+    <SolidColorBrush x:Key="BorderStrongBrush" Color="#3D3D44" />
+
+    <!-- Text -->
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#EDEDE9" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#A3A39C" />
+    <SolidColorBrush x:Key="TextMutedBrush" Color="#75756F" />
+    <SolidColorBrush x:Key="TextOnAccentBrush" Color="#FFFFFF" />
+
+    <!-- Roles -->
+    <SolidColorBrush x:Key="AccentBrush" Color="#3B7FCC" />
+    <SolidColorBrush x:Key="AccentHoverBrush" Color="#4C8FD8" />
+    <SolidColorBrush x:Key="AccentSoftBrush" Color="#16324D" />
+    <SolidColorBrush x:Key="AccentTextBrush" Color="#85B7EB" />
+    <SolidColorBrush x:Key="DangerSoftBrush" Color="#3A1F1E" />
+    <SolidColorBrush x:Key="DangerTextBrush" Color="#F09595" />
+    <SolidColorBrush x:Key="SuccessSoftBrush" Color="#22301A" />
+    <SolidColorBrush x:Key="SuccessTextBrush" Color="#97C459" />
+
+</ResourceDictionary>

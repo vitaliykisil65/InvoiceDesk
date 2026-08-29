@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Nav_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Nav_Invoices" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="Nav_Clients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="Nav_Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="Nav_Payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="Nav_Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Nav_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+
+  <data name="Shell_SearchPlaceholder" xml:space="preserve">
+    <value>Search clients and invoices</value>
+  </data>
+  <data name="Shell_NewInvoice" xml:space="preserve">
+    <value>New invoice</value>
+  </data>
+  <data name="Shell_SwitchTheme" xml:space="preserve">
+    <value>Switch theme</value>
+  </data>
+  <data name="Shell_LocalDatabase" xml:space="preserve">
+    <value>Local database</value>
+  </data>
+  <data name="Shell_BackupStatus" xml:space="preserve">
+    <value>Backup: today {0}</value>
+  </data>
+  <data name="Shell_Minimize" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="Shell_Maximize" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="Shell_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Shell_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+
+  <data name="Dashboard_RevenueForMonth" xml:space="preserve">
+    <value>Revenue, {0}</value>
+  </data>
+  <data name="Dashboard_Outstanding" xml:space="preserve">
+    <value>Outstanding</value>
+  </data>
+  <data name="Dashboard_Overdue" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="Dashboard_Clients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="Dashboard_RevenueByMonth" xml:space="preserve">
+    <value>Revenue by month</value>
+  </data>
+  <data name="Dashboard_Summary" xml:space="preserve">
+    <value>{0} clients, {1} invoices</value>
+  </data>
+
+  <data name="Column_Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Column_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="Column_Due" xml:space="preserve">
+    <value>Due</value>
+  </data>
+  <data name="Column_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Column_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+
+  <data name="Status_Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="Status_Sent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="Status_PartiallyPaid" xml:space="preserve">
+    <value>Partially paid</value>
+  </data>
+  <data name="Status_Paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="Status_Overdue" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+
+  <data name="Placeholder_Planned" xml:space="preserve">
+    <value>Planned for an upcoming milestone</value>
+  </data>
+  <data name="Placeholder_Invoices" xml:space="preserve">
+    <value>Invoice list with filters, bulk actions and PDF export.</value>
+  </data>
+  <data name="Placeholder_Clients" xml:space="preserve">
+    <value>Client directory with balances and invoice history.</value>
+  </data>
+  <data name="Placeholder_Services" xml:space="preserve">
+    <value>Price list of products and services.</value>
+  </data>
+  <data name="Placeholder_Payments" xml:space="preserve">
+    <value>Payments received against open invoices.</value>
+  </data>
+  <data name="Placeholder_Reports" xml:space="preserve">
+    <value>Revenue, tax and client reports with export.</value>
+  </data>
+
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="Settings_AppearanceHint" xml:space="preserve">
+    <value>Applies immediately, no restart needed.</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Settings_ThemeHint" xml:space="preserve">
+    <value>Window and controls</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Theme_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Settings_LanguageHint" xml:space="preserve">
+    <value>Interface language</value>
+  </data>
+  <data name="Language_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_Ukrainian" xml:space="preserve">
+    <value>Ukrainian</value>
+  </data>
+  <data name="Settings_LanguageSystemHint" xml:space="preserve">
+    <value>Follows the Windows display language, English if it is not available.</value>
+  </data>
+  <data name="Settings_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Settings_StorageHint" xml:space="preserve">
+    <value>Where the app reads and writes files on this machine.</value>
+  </data>
+  <data name="Settings_Reports" xml:space="preserve">
+    <value>Reports and exports</value>
+  </data>
+  <data name="Settings_ReportsHint" xml:space="preserve">
+    <value>PDF, Excel, CSV</value>
+  </data>
+  <data name="Settings_Attachments" xml:space="preserve">
+    <value>Attachments</value>
+  </data>
+  <data name="Settings_AttachmentsHint" xml:space="preserve">
+    <value>Files linked to invoices</value>
+  </data>
+  <data name="Settings_Backups" xml:space="preserve">
+    <value>Backups</value>
+  </data>
+  <data name="Settings_BackupsHint" xml:space="preserve">
+    <value>Database snapshots</value>
+  </data>
+  <data name="Settings_AfterExport" xml:space="preserve">
+    <value>After export</value>
+  </data>
+  <data name="Settings_AfterExportHint" xml:space="preserve">
+    <value>When a file is written</value>
+  </data>
+  <data name="Settings_AskWhereToSave" xml:space="preserve">
+    <value>Ask where to save each file</value>
+  </data>
+  <data name="Settings_OpenFolderAfterExport" xml:space="preserve">
+    <value>Open the folder after export</value>
+  </data>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Choose folder</value>
+  </data>
+  <data name="Settings_OpenFolder" xml:space="preserve">
+    <value>Open in Explorer</value>
+  </data>
+  <data name="Settings_ResetDefaults" xml:space="preserve">
+    <value>Reset to defaults</value>
+  </data>
+  <data name="Settings_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Settings_SavedAt" xml:space="preserve">
+    <value>Saved at {0}</value>
+  </data>
+  <data name="Settings_UnsavedChanges" xml:space="preserve">
+    <value>You have unsaved changes</value>
+  </data>
+  <data name="Settings_FolderMissing" xml:space="preserve">
+    <value>This folder does not exist yet. It will be created on save.</value>
+  </data>
+</root>
