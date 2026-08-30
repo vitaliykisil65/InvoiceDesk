@@ -120,9 +120,6 @@
   <data name="Placeholder_Invoices" xml:space="preserve">
     <value>Invoice list with filters, bulk actions and PDF export.</value>
   </data>
-  <data name="Placeholder_Clients" xml:space="preserve">
-    <value>Client directory with balances and invoice history.</value>
-  </data>
   <data name="Placeholder_Services" xml:space="preserve">
     <value>Price list of products and services.</value>
   </data>
@@ -228,5 +225,74 @@
   </data>
   <data name="Settings_FolderMissing" xml:space="preserve">
     <value>This folder does not exist yet. It will be created on save.</value>
+  </data>
+  <data name="Clients_New" xml:space="preserve">
+    <value>New client</value>
+  </data>
+  <data name="Clients_SearchPlaceholder" xml:space="preserve">
+    <value>Search clients</value>
+  </data>
+  <data name="Clients_ShowArchived" xml:space="preserve">
+    <value>Show archived</value>
+  </data>
+  <data name="Clients_Count" xml:space="preserve">
+    <value>{0} clients</value>
+  </data>
+  <data name="Clients_NewTitle" xml:space="preserve">
+    <value>New client</value>
+  </data>
+  <data name="Clients_EditTitle" xml:space="preserve">
+    <value>Client details</value>
+  </data>
+  <data name="Clients_Archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="Clients_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Clients_Save" xml:space="preserve">
+    <value>Save client</value>
+  </data>
+  <data name="Clients_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Clients_Name" xml:space="preserve">
+    <value>Company name</value>
+  </data>
+  <data name="Clients_ContactPerson" xml:space="preserve">
+    <value>Contact person</value>
+  </data>
+  <data name="Clients_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Clients_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Clients_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Clients_TaxNumber" xml:space="preserve">
+    <value>Tax number</value>
+  </data>
+  <data name="Clients_Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Clients_NameRequired" xml:space="preserve">
+    <value>A client needs a name.</value>
+  </data>
+  <data name="Clients_EmailInvalid" xml:space="preserve">
+    <value>This does not look like an email address.</value>
+  </data>
+  <data name="Clients_Saved" xml:space="preserve">
+    <value>Saved {0}.</value>
+  </data>
+  <data name="Clients_ArchivedStatus" xml:space="preserve">
+    <value>Client archived. It stays on its old invoices.</value>
+  </data>
+  <data name="Clients_RestoredStatus" xml:space="preserve">
+    <value>Client restored.</value>
+  </data>
+  <data name="Clients_ArchivedTag" xml:space="preserve">
+    <value>Archived</value>
   </data>
 </root>

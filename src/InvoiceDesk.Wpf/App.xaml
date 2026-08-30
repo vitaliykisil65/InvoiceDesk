@@ -13,10 +13,14 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:EnumMatchConverter x:Key="EnumMatchConverter" />
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
 
             <!-- View model to view mapping -->
             <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
                 <views:DashboardView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ClientsViewModel}">
+                <views:ClientsView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
                 <views:SettingsView />

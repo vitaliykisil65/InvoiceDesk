@@ -85,6 +85,7 @@
                 <Grid Grid.Column="1" Background="{DynamicResource SurfacePageBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
@@ -108,7 +109,16 @@
                                 Content="{Binding ThemeGlyph}" ToolTip="{loc:Text Shell_SwitchTheme}" />
                     </Grid>
 
-                    <ContentControl Grid.Row="1" Content="{Binding CurrentPage}" Margin="20,14,20,16" />
+                    <!-- A page that failed to load says so here, once, for every page -->
+                    <Border Grid.Row="1" Margin="20,12,20,0" CornerRadius="6" Padding="12,8"
+                            Background="{DynamicResource DangerSoftBrush}"
+                            Visibility="{Binding CurrentPage.LoadError, Converter={StaticResource StringToVisibilityConverter}}">
+                        <TextBlock FontSize="12" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource DangerTextBrush}"
+                                   Text="{Binding CurrentPage.LoadError}" />
+                    </Border>
+
+                    <ContentControl Grid.Row="2" Content="{Binding CurrentPage}" Margin="20,14,20,16" />
                 </Grid>
             </Grid>
         </Grid>

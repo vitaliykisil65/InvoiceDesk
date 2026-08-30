@@ -1,0 +1,222 @@
+<UserControl x:Class="InvoiceDesk.Wpf.Views.ClientsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:loc="clr-namespace:InvoiceDesk.Wpf.Localization"
+             xmlns:vm="clr-namespace:InvoiceDesk.Wpf.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:ClientsViewModel}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        </Style>
+
+        <Style x:Key="FieldBox" TargetType="TextBox" BasedOn="{StaticResource SearchBox}">
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+
+        <Style x:Key="NotesBox" TargetType="TextBox" BasedOn="{StaticResource FieldBox}">
+            <Setter Property="Height" Value="72" />
+            <Setter Property="Padding" Value="10,6" />
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+        </Style>
+
+        <!-- One row of the client list: avatar, name, and whatever we know to
+             identify the client by underneath -->
+        <Style x:Key="ClientListItem" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Root" Background="Transparent" CornerRadius="6" Margin="8,1"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background"
+                                        Value="{DynamicResource SurfaceHoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Root" Property="Background"
+                                        Value="{DynamicResource AccentSoftBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="308" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- List -->
+        <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="0" Margin="0,0,12,0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="12,12,12,6">
+                    <TextBox Style="{StaticResource SearchBox}"
+                             Tag="{loc:Text Clients_SearchPlaceholder}"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Grid Margin="0,10,0,0">
+                        <Button HorizontalAlignment="Left" Style="{StaticResource PrimaryButton}"
+                                Command="{Binding NewClientCommand}"
+                                Content="{loc:Text Clients_New}" />
+                        <CheckBox HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"
+                                  Foreground="{DynamicResource TextSecondaryBrush}"
+                                  IsChecked="{Binding ShowArchived}"
+                                  Content="{loc:Text Clients_ShowArchived}" />
+                    </Grid>
+                </StackPanel>
+
+                <Border DockPanel.Dock="Bottom" BorderBrush="{DynamicResource BorderSubtleBrush}"
+                        BorderThickness="0,1,0,0" Padding="14,8">
+                    <TextBlock Style="{StaticResource CaptionText}" Text="{Binding ListSummary}" />
+                </Border>
+
+                <ListBox ItemsSource="{Binding Clients}"
+                         SelectedItem="{Binding SelectedClient}"
+                         ItemContainerStyle="{StaticResource ClientListItem}"
+                         Background="Transparent" BorderThickness="0"
+                         HorizontalContentAlignment="Stretch"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Width="30" Height="30" CornerRadius="15"
+                                        Background="{DynamicResource SurfaceMutedBrush}" Margin="0,0,10,0">
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               FontSize="12" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextSecondaryBrush}"
+                                               Text="{Binding Initials}" />
+                                </Border>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock FontSize="13" TextTrimming="CharacterEllipsis"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"
+                                               Text="{Binding Name}" />
+                                    <TextBlock FontSize="11" TextTrimming="CharacterEllipsis" Margin="0,1,0,0"
+                                               Foreground="{DynamicResource TextMutedBrush}"
+                                               Text="{Binding Subtitle}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
+
+        <!-- Editor -->
+        <Border Grid.Column="1" Style="{StaticResource CardBorder}">
+            <DockPanel>
+                <Grid DockPanel.Dock="Top" Margin="0,0,0,16">
+                    <TextBlock Style="{StaticResource PageTitleText}" FontSize="16"
+                               Text="{Binding EditorTitle}" />
+                    <Button HorizontalAlignment="Right" Style="{StaticResource SubtleButton}"
+                            Command="{Binding ToggleArchiveCommand}"
+                            Content="{Binding ArchiveActionText}" />
+                </Grid>
+
+                <!-- Actions and messages stay pinned under the form -->
+                <Border DockPanel.Dock="Bottom" BorderBrush="{DynamicResource BorderSubtleBrush}"
+                        BorderThickness="0,1,0,0" Padding="0,12,0,0" Margin="0,4,0,0">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="12" TextWrapping="Wrap"
+                                       Foreground="{DynamicResource DangerTextBrush}"
+                                       Text="{Binding ValidationMessage}" />
+                            <TextBlock FontSize="12" TextWrapping="Wrap"
+                                       Foreground="{DynamicResource TextMutedBrush}"
+                                       Text="{Binding StatusMessage}" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
+                                    Command="{Binding CancelCommand}"
+                                    Content="{loc:Text Clients_Cancel}" />
+                            <Button Style="{StaticResource PrimaryButton}"
+                                    Command="{Binding SaveCommand}"
+                                    Content="{loc:Text Clients_Save}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="0,0,4,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="0">
+                            <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Clients_Name}" />
+                            <TextBox Style="{StaticResource FieldBox}"
+                                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="2">
+                            <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Clients_ContactPerson}" />
+                            <TextBox Style="{StaticResource FieldBox}"
+                                     Text="{Binding ContactPerson, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="0">
+                            <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Clients_Email}" />
+                            <TextBox Style="{StaticResource FieldBox}"
+                                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="2">
+                            <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Clients_Phone}" />
+                            <TextBox Style="{StaticResource FieldBox}"
+                                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="0">
+                            <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Clients_Address}" />
+                            <TextBox Style="{StaticResource FieldBox}"
+                                     Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="2">
+                            <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Clients_TaxNumber}" />
+                            <TextBox Style="{StaticResource FieldBox}"
+                                     Text="{Binding TaxNumber, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+                            <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Clients_Notes}" />
+                            <TextBox Style="{StaticResource NotesBox}"
+                                     Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

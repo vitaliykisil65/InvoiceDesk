@@ -206,4 +206,73 @@
   <data name="Settings_FolderMissing" xml:space="preserve">
     <value>Такої теки ще немає. Її буде створено під час збереження.</value>
   </data>
+  <data name="Clients_New" xml:space="preserve">
+    <value>Новий клієнт</value>
+  </data>
+  <data name="Clients_SearchPlaceholder" xml:space="preserve">
+    <value>Пошук клієнтів</value>
+  </data>
+  <data name="Clients_ShowArchived" xml:space="preserve">
+    <value>Показати архівні</value>
+  </data>
+  <data name="Clients_Count" xml:space="preserve">
+    <value>Клієнтів: {0}</value>
+  </data>
+  <data name="Clients_NewTitle" xml:space="preserve">
+    <value>Новий клієнт</value>
+  </data>
+  <data name="Clients_EditTitle" xml:space="preserve">
+    <value>Картка клієнта</value>
+  </data>
+  <data name="Clients_Archive" xml:space="preserve">
+    <value>В архів</value>
+  </data>
+  <data name="Clients_Restore" xml:space="preserve">
+    <value>Відновити</value>
+  </data>
+  <data name="Clients_Save" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="Clients_Cancel" xml:space="preserve">
+    <value>Скасувати</value>
+  </data>
+  <data name="Clients_Name" xml:space="preserve">
+    <value>Назва компанії</value>
+  </data>
+  <data name="Clients_ContactPerson" xml:space="preserve">
+    <value>Контактна особа</value>
+  </data>
+  <data name="Clients_Email" xml:space="preserve">
+    <value>Пошта</value>
+  </data>
+  <data name="Clients_Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="Clients_Address" xml:space="preserve">
+    <value>Адреса</value>
+  </data>
+  <data name="Clients_TaxNumber" xml:space="preserve">
+    <value>Податковий номер</value>
+  </data>
+  <data name="Clients_Notes" xml:space="preserve">
+    <value>Нотатки</value>
+  </data>
+  <data name="Clients_NameRequired" xml:space="preserve">
+    <value>Клієнт потребує назви.</value>
+  </data>
+  <data name="Clients_EmailInvalid" xml:space="preserve">
+    <value>Це не схоже на адресу пошти.</value>
+  </data>
+  <data name="Clients_Saved" xml:space="preserve">
+    <value>Збережено: {0}.</value>
+  </data>
+  <data name="Clients_ArchivedStatus" xml:space="preserve">
+    <value>Клієнта переміщено в архів. У старих рахунках він залишається.</value>
+  </data>
+  <data name="Clients_RestoredStatus" xml:space="preserve">
+    <value>Клієнта відновлено.</value>
+  </data>
+  <data name="Clients_ArchivedTag" xml:space="preserve">
+    <value>В архіві</value>
+  </data>
 </root>

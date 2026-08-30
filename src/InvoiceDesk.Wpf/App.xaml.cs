@@ -25,6 +25,7 @@ public partial class App : Application
                 services.AddInvoiceDeskData(AppPaths.DatabaseFile);
 
                 services.AddSingleton<DashboardViewModel>();
+                services.AddSingleton<ClientsViewModel>();
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<ShellViewModel>();
                 services.AddSingleton<ShellWindow>();

@@ -19,6 +19,7 @@ public partial class ShellViewModel : ObservableObject
 
     public ShellViewModel(
         DashboardViewModel dashboard,
+        ClientsViewModel clients,
         SettingsViewModel settings,
         ThemeService themeService,
         LocalizationService localizationService)
@@ -29,7 +30,7 @@ public partial class ShellViewModel : ObservableObject
         [
             dashboard,
             new PlaceholderViewModel("Nav_Invoices", "", "Placeholder_Invoices"),
-            new PlaceholderViewModel("Nav_Clients", "", "Placeholder_Clients"),
+            clients,
             new PlaceholderViewModel("Nav_Services", "", "Placeholder_Services"),
             new PlaceholderViewModel("Nav_Payments", "", "Placeholder_Payments"),
             new PlaceholderViewModel("Nav_Reports", "", "Placeholder_Reports"),
@@ -52,6 +53,26 @@ public partial class ShellViewModel : ObservableObject
     public string BackupStatus => LocalizedStrings.Format(
         "Shell_BackupStatus",
         DateTime.Now.ToString("HH:mm", CultureInfo.CurrentUICulture));
+
+    partial void OnCurrentPageChanged(PageViewModel value) => ActivatePage(value);
+
+    /// <summary>
+    /// Pages load their own data when the user navigates to them. This is the
+    /// one place that runs it, and a page that fails to load reports it through
+    /// its own banner rather than taking the window down.
+    /// </summary>
+    private static async void ActivatePage(PageViewModel page)
+    {
+        try
+        {
+            page.LoadError = string.Empty;
+            await page.OnActivatedAsync();
+        }
+        catch (Exception exception)
+        {
+            page.LoadError = exception.Message;
+        }
+    }
 
     [RelayCommand]
     private void ToggleTheme() => _themeService.Toggle();

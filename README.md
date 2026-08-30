@@ -24,6 +24,9 @@ not to ship a commercial product.
 - **Configurable storage** — reports, attachments and backups each get a folder
   the user picks; defaults sit under the user's Documents folder so an install
   into Program Files still has somewhere writable.
+- **Clients** — searchable list next to an editor: add a client, correct one, or
+  archive it. Clients are archived rather than deleted, so an invoice never
+  loses the company it was issued to.
 - **Dashboard** — revenue for the current month, outstanding and overdue totals,
   an eight month revenue chart and the latest invoices, all computed from the
   data rather than hard-coded.
@@ -51,10 +54,11 @@ not to ship a commercial product.
 ## Status
 
 Working today: shell and navigation, theming, localization, settings, a SQLite
-database created and migrated on first launch, and a dashboard driven by it.
+database created and migrated on first launch, a dashboard driven by it, and a
+clients screen where records are created, edited and archived.
 
-Next: the invoice list and editor, clients and price list screens, PDF export,
-backups, and a Windows installer.
+Next: the price list, the invoice list and editor, PDF export, backups, and a
+Windows installer.
 
 ## Build and run
 

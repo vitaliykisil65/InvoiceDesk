@@ -25,6 +25,7 @@ public static class ServiceCollectionExtensions
 
         services.AddDbContextFactory<InvoiceDeskContext>(options => options.UseSqlite(connectionString));
         services.AddSingleton<IInvoiceDataStore, EfInvoiceDataStore>();
+        services.AddSingleton<IClientStore, EfClientStore>();
         services.AddSingleton<DatabaseInitializer>();
 
         return services;
