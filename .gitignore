@@ -38,3 +38,8 @@ installer/Output/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+## Local SQLite database
+*.db
+*.db-shm
+*.db-wal

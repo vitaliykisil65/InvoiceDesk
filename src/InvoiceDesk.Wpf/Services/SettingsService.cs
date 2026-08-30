@@ -20,12 +20,8 @@ public class SettingsService
 
     public SettingsService()
     {
-        var folder = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "InvoiceDesk");
-
-        Directory.CreateDirectory(folder);
-        _settingsPath = Path.Combine(folder, "settings.json");
+        Directory.CreateDirectory(AppPaths.AppDataFolder);
+        _settingsPath = AppPaths.SettingsFile;
         Current = Load();
     }
 

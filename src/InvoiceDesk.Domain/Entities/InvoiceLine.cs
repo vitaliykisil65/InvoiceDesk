@@ -9,6 +9,9 @@ public class InvoiceLine
 
     public int? ProductId { get; set; }
 
+    /// <summary>The price list entry this line came from, if any.</summary>
+    public Product? Product { get; set; }
+
     public string Description { get; set; } = string.Empty;
 
     public string Unit { get; set; } = "pcs";

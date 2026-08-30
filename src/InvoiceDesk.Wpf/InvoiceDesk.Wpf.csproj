@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InvoiceDesk.Data\InvoiceDesk.Data.csproj" />
     <ProjectReference Include="..\InvoiceDesk.Domain\InvoiceDesk.Domain.csproj" />
   </ItemGroup>
 

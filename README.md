@@ -18,6 +18,9 @@ not to ship a commercial product.
   through a markup extension, so the language switches without a restart.
   English is the invariant fallback for anything untranslated. The default
   follows the machine locale.
+- **Local SQLite database** — EF Core with migrations applied on startup, and a
+  first run that seeds eight months of sample trading so the app opens on a
+  dashboard with something in it.
 - **Configurable storage** — reports, attachments and backups each get a folder
   the user picks; defaults sit under the user's Documents folder so an install
   into Program Files still has somewhere writable.
@@ -29,7 +32,8 @@ not to ship a commercial product.
 
 | Project | Contents |
 | --- | --- |
-| `InvoiceDesk.Domain` | Entities and the money and status rules that go with them |
+| `InvoiceDesk.Domain` | Entities, the money and status rules that go with them, and the storage abstraction |
+| `InvoiceDesk.Data` | EF Core and SQLite: context, entity configurations, migrations, seeding |
 | `InvoiceDesk.Wpf` | Views, view models, services, themes and resources |
 
 - MVVM with `CommunityToolkit.Mvvm`; views never reach into each other.
@@ -37,15 +41,20 @@ not to ship a commercial product.
   shell window are resolved from the container.
 - View models are mapped to views by `DataTemplate`, so navigation is a matter
   of setting a property.
-- Settings are persisted as JSON under `%AppData%\InvoiceDesk\settings.json`.
+- View models read through `IInvoiceDataStore` and never see a `DbContext`, so
+  the WPF project carries no reference to EF Core.
+- Data is read through short-lived contexts from `IDbContextFactory` — a window
+  that stays open for hours has no business holding a context open with it.
+- Settings are persisted as JSON under `%AppData%\InvoiceDesk\settings.json`;
+  the database sits next to them as `invoicedesk.db`.
 
 ## Status
 
-Working today: shell and navigation, theming, localization, settings, and a
-dashboard driven by seeded sample data.
+Working today: shell and navigation, theming, localization, settings, a SQLite
+database created and migrated on first launch, and a dashboard driven by it.
 
-Next: EF Core with SQLite behind the existing data store interface, the invoice
-list and editor, PDF export, backups, and a Windows installer.
+Next: the invoice list and editor, clients and price list screens, PDF export,
+backups, and a Windows installer.
 
 ## Build and run
 
@@ -54,4 +63,12 @@ Requires the .NET 9 SDK on Windows.
 ```
 dotnet build
 dotnet run --project src/InvoiceDesk.Wpf
+```
+
+The EF Core tools are pinned in the local manifest, so migrations need no global
+install:
+
+```
+dotnet tool restore
+dotnet ef migrations add <Name> --project src/InvoiceDesk.Data
 ```

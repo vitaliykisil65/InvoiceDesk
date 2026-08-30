@@ -1,8 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
+using InvoiceDesk.Domain.Abstractions;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
-using InvoiceDesk.Wpf.Services;
 
 namespace InvoiceDesk.Wpf.ViewModels;
 
@@ -12,10 +12,13 @@ public class DashboardViewModel : PageViewModel
 
     private readonly IInvoiceDataStore _store;
 
+    private IReadOnlyList<Client> _clients = [];
+
+    private IReadOnlyList<Invoice> _invoices = [];
+
     public DashboardViewModel(IInvoiceDataStore store)
     {
         _store = store;
-        Reload();
     }
 
     public override string TitleKey => "Nav_Dashboard";
@@ -42,48 +45,65 @@ public class DashboardViewModel : PageViewModel
     public override void OnLanguageChanged()
     {
         base.OnLanguageChanged();
-        Reload();
 
-        OnPropertyChanged(nameof(RevenueThisMonth));
-        OnPropertyChanged(nameof(OutstandingTotal));
-        OnPropertyChanged(nameof(OverdueTotal));
-        OnPropertyChanged(nameof(ClientCount));
-        OnPropertyChanged(nameof(CurrentMonthLabel));
-        OnPropertyChanged(nameof(DataSummary));
+        // Only the formatting depends on the language, so this reformats what
+        // was already loaded instead of going back to the database.
+        Rebuild();
     }
 
-    private void Reload()
+    /// <summary>Reads the current data and rebuilds everything on the page.</summary>
+    public async Task LoadAsync(CancellationToken cancellationToken = default)
+    {
+        _clients = await _store.GetClientsAsync(cancellationToken);
+        _invoices = await _store.GetInvoicesAsync(cancellationToken);
+
+        Rebuild();
+    }
+
+    private void Rebuild()
     {
         var today = DateTime.Today;
         var monthStart = new DateTime(today.Year, today.Month, 1);
 
-        var paidThisMonth = _store.Invoices
+        var paidThisMonth = _invoices
             .SelectMany(invoice => invoice.Payments)
             .Where(payment => payment.PaidOn >= monthStart)
             .Sum(payment => payment.Amount);
 
-        var outstanding = _store.Invoices
+        var outstanding = _invoices
             .Where(invoice => invoice.Status is not (InvoiceStatus.Draft or InvoiceStatus.Paid))
             .Sum(invoice => invoice.OutstandingAmount);
 
-        var overdue = _store.Invoices
+        var overdue = _invoices
             .Where(invoice => invoice.Status == InvoiceStatus.Overdue)
             .Sum(invoice => invoice.OutstandingAmount);
 
         RevenueThisMonth = FormatMoney(paidThisMonth);
         OutstandingTotal = FormatMoney(outstanding);
         OverdueTotal = FormatMoney(overdue);
-        ClientCount = _store.Clients.Count.ToString(CultureInfo.CurrentUICulture);
+        ClientCount = _clients.Count.ToString(CultureInfo.CurrentUICulture);
         CurrentMonthLabel = LocalizedStrings.Format(
             "Dashboard_RevenueForMonth",
             monthStart.ToString("MMMM", CultureInfo.CurrentUICulture));
         DataSummary = LocalizedStrings.Format(
             "Dashboard_Summary",
-            _store.Clients.Count,
-            _store.Invoices.Count);
+            _clients.Count,
+            _invoices.Count);
 
         BuildChart(monthStart);
         BuildRecentInvoices();
+
+        RaiseSummaryChanged();
+    }
+
+    private void RaiseSummaryChanged()
+    {
+        OnPropertyChanged(nameof(RevenueThisMonth));
+        OnPropertyChanged(nameof(OutstandingTotal));
+        OnPropertyChanged(nameof(OverdueTotal));
+        OnPropertyChanged(nameof(ClientCount));
+        OnPropertyChanged(nameof(CurrentMonthLabel));
+        OnPropertyChanged(nameof(DataSummary));
     }
 
     private void BuildChart(DateTime currentMonthStart)
@@ -96,7 +116,7 @@ public class DashboardViewModel : PageViewModel
             var start = currentMonthStart.AddMonths(-monthsBack);
             var end = start.AddMonths(1);
 
-            var amount = _store.Invoices
+            var amount = _invoices
                 .SelectMany(invoice => invoice.Payments)
                 .Where(payment => payment.PaidOn >= start && payment.PaidOn < end)
                 .Sum(payment => payment.Amount);
@@ -121,7 +141,7 @@ public class DashboardViewModel : PageViewModel
     {
         RecentInvoices.Clear();
 
-        var rows = _store.Invoices
+        var rows = _invoices
             .OrderByDescending(invoice => invoice.IssuedOn)
             .Take(6)
             .Select(invoice => new InvoiceRowViewModel(invoice));
