@@ -38,14 +38,16 @@ not to ship a commercial product.
 | `InvoiceDesk.Domain` | Entities, the money and status rules that go with them, and the storage abstraction |
 | `InvoiceDesk.Data` | EF Core and SQLite: context, entity configurations, migrations, seeding |
 | `InvoiceDesk.Wpf` | Views, view models, services, themes and resources |
+| `InvoiceDesk.Domain.Tests` | Unit tests for the money, status and numbering rules |
 
 - MVVM with `CommunityToolkit.Mvvm`; views never reach into each other.
 - Dependency injection through the .NET Generic Host; every view model and the
   shell window are resolved from the container.
 - View models are mapped to views by `DataTemplate`, so navigation is a matter
   of setting a property.
-- View models read through `IInvoiceDataStore` and never see a `DbContext`, so
-  the WPF project carries no reference to EF Core.
+- View models read and write through store interfaces (`IClientStore`,
+  `IProductStore`, `IInvoiceStore`, `IPaymentStore`) and never see a
+  `DbContext`, so the WPF project carries no reference to EF Core.
 - Data is read through short-lived contexts from `IDbContextFactory` — a window
   that stays open for hours has no business holding a context open with it.
 - Settings are persisted as JSON under `%AppData%\InvoiceDesk\settings.json`;
@@ -55,7 +57,8 @@ not to ship a commercial product.
 
 Working today: shell and navigation, theming, localization, settings, a SQLite
 database created and migrated on first launch, a dashboard driven by it, and a
-clients screen where records are created, edited and archived.
+clients screen where records are created, edited and archived. The money,
+status and invoice numbering rules are covered by unit tests.
 
 Next: the price list, the invoice list and editor, PDF export, backups, and a
 Windows installer.
@@ -66,6 +69,7 @@ Requires the .NET 9 SDK on Windows.
 
 ```
 dotnet build
+dotnet test
 dotnet run --project src/InvoiceDesk.Wpf
 ```
 

@@ -4,4 +4,7 @@
     <Project Path="src/InvoiceDesk.Data/InvoiceDesk.Data.csproj" />
     <Project Path="src/InvoiceDesk.Wpf/InvoiceDesk.Wpf.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/InvoiceDesk.Domain.Tests/InvoiceDesk.Domain.Tests.csproj" />
+  </Folder>
 </Solution>

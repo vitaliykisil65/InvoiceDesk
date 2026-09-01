@@ -10,15 +10,18 @@ public class DashboardViewModel : PageViewModel
 {
     private const double MaxBarHeight = 90d;
 
-    private readonly IInvoiceDataStore _store;
+    private readonly IClientStore _clientStore;
+
+    private readonly IInvoiceStore _invoiceStore;
 
     private IReadOnlyList<Client> _clients = [];
 
     private IReadOnlyList<Invoice> _invoices = [];
 
-    public DashboardViewModel(IInvoiceDataStore store)
+    public DashboardViewModel(IClientStore clientStore, IInvoiceStore invoiceStore)
     {
-        _store = store;
+        _clientStore = clientStore;
+        _invoiceStore = invoiceStore;
     }
 
     public override string TitleKey => "Nav_Dashboard";
@@ -54,8 +57,8 @@ public class DashboardViewModel : PageViewModel
     /// <summary>Reads the current data and rebuilds everything on the page.</summary>
     public async Task LoadAsync(CancellationToken cancellationToken = default)
     {
-        _clients = await _store.GetClientsAsync(cancellationToken);
-        _invoices = await _store.GetInvoicesAsync(cancellationToken);
+        _clients = await _clientStore.GetAsync(cancellationToken: cancellationToken);
+        _invoices = await _invoiceStore.GetAsync(cancellationToken);
 
         Rebuild();
     }

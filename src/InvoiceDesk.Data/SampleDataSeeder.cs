@@ -1,3 +1,4 @@
+using InvoiceDesk.Domain;
 using InvoiceDesk.Domain.Entities;
 
 namespace InvoiceDesk.Data;
@@ -67,7 +68,7 @@ public static class SampleDataSeeder
                 var issuedOn = month.AddDays(random.Next(0, 26));
                 var invoice = new Invoice
                 {
-                    Number = $"INV-{number:D4}",
+                    Number = InvoiceNumbers.Format(InvoiceNumbers.DefaultPrefix, issuedOn.Year, number),
                     Client = clients[random.Next(clients.Count)],
                     IssuedOn = issuedOn,
                     DueOn = issuedOn.AddDays(14),

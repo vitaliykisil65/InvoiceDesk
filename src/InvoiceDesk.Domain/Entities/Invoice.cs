@@ -40,6 +40,12 @@ public class Invoice
 
     public decimal OutstandingAmount => GrandTotal - PaidAmount;
 
+    /// <summary>
+    /// Applies the status the payments and the due date imply. Called on every
+    /// write, so what is stored matches what the totals say.
+    /// </summary>
+    public void ApplyStatus(DateTime today) => Status = ResolveStatus(today);
+
     /// <summary>Recalculates the status from payments and the due date.</summary>
     public InvoiceStatus ResolveStatus(DateTime today)
     {
