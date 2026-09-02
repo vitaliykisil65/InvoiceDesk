@@ -376,9 +376,6 @@
   <data name="Invoices_RecordPayment" xml:space="preserve">
     <value>Record payment</value>
   </data>
-  <data name="Invoices_RecordPayment" xml:space="preserve">
-    <value>Record payment</value>
-  </data>
   <data name="Invoices_DeleteDraft" xml:space="preserve">
     <value>Delete draft</value>
   </data>
@@ -424,6 +421,12 @@
   <data name="Invoices_Open" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="Invoices_ExportPdf" xml:space="preserve">
+    <value>Export PDF</value>
+  </data>
+  <data name="Invoices_PdfExported" xml:space="preserve">
+    <value>{0} exported to PDF.</value>
+  </data>
   <data name="InvoiceEditor_Title" xml:space="preserve">
     <value>Invoice</value>
   </data>
@@ -438,6 +441,9 @@
   </data>
   <data name="InvoiceEditor_Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="InvoiceEditor_ExportPdf" xml:space="preserve">
+    <value>Export PDF</value>
   </data>
   <data name="InvoiceEditor_ReadOnlyHint" xml:space="preserve">
     <value>This invoice has been sent, so it can no longer be changed. Record a payment against it instead.</value>
@@ -513,6 +519,24 @@
   </data>
   <data name="InvoiceEditor_Saved" xml:space="preserve">
     <value>{0} saved.</value>
+  </data>
+  <data name="InvoiceEditor_PdfExported" xml:space="preserve">
+    <value>Saved as {0}.</value>
+  </data>
+  <data name="InvoicePdf_Title" xml:space="preserve">
+    <value>INVOICE</value>
+  </data>
+  <data name="InvoicePdf_BillTo" xml:space="preserve">
+    <value>Bill to</value>
+  </data>
+  <data name="InvoicePdf_TaxNumber" xml:space="preserve">
+    <value>Tax no. {0}</value>
+  </data>
+  <data name="InvoicePdf_Issued" xml:space="preserve">
+    <value>Issued: {0}</value>
+  </data>
+  <data name="InvoicePdf_Due" xml:space="preserve">
+    <value>Due: {0}</value>
   </data>
   <data name="InvoiceEditor_NumberRequired" xml:space="preserve">
     <value>An invoice needs a number.</value>

@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceDesk.Domain;
@@ -35,6 +36,8 @@ public partial class InvoiceEditorViewModel : PageViewModel
     private readonly IProductStore _products;
 
     private readonly SettingsService _settings;
+
+    private readonly InvoicePdfService _pdf;
 
     private readonly NavigationService _navigation;
 
@@ -83,12 +86,14 @@ public partial class InvoiceEditorViewModel : PageViewModel
         IClientStore clients,
         IProductStore products,
         SettingsService settings,
+        InvoicePdfService pdf,
         NavigationService navigation)
     {
         _invoices = invoices;
         _clients = clients;
         _products = products;
         _settings = settings;
+        _pdf = pdf;
         _navigation = navigation;
 
         Lines.CollectionChanged += OnLinesChanged;
@@ -255,6 +260,27 @@ public partial class InvoiceEditorViewModel : PageViewModel
 
     private bool CanSave() => !IsBusy && IsEditable && Validate().Length == 0;
 
+    /// <summary>Exports what the form currently shows, saved changes or not.</summary>
+    [RelayCommand(CanExecute = nameof(CanExportPdf))]
+    private void ExportPdf()
+    {
+        try
+        {
+            var path = _pdf.Export(BuildInvoice());
+
+            StatusMessage = path is null
+                ? string.Empty
+                : LocalizedStrings.Format("InvoiceEditor_PdfExported", Path.GetFileName(path));
+        }
+        catch (Exception exception)
+        {
+            Log.Error(exception, "Failed to export invoice {Number} to PDF", Number);
+            StatusMessage = exception.Message;
+        }
+    }
+
+    private bool CanExportPdf() => SelectedClient is not null && Lines.Count > 0;
+
     [RelayCommand]
     private void Back() => _navigation.GoBack();
 
@@ -341,6 +367,7 @@ public partial class InvoiceEditorViewModel : PageViewModel
         OnPropertyChanged(nameof(StatusText));
 
         SaveCommand.NotifyCanExecuteChanged();
+        ExportPdfCommand.NotifyCanExecuteChanged();
     }
 
     /// <summary>The invoice the form currently describes, ready to be stored.</summary>
@@ -349,6 +376,7 @@ public partial class InvoiceEditorViewModel : PageViewModel
         Id = _editing.Id,
         Number = Number.Trim(),
         ClientId = SelectedClient?.Id ?? 0,
+        Client = SelectedClient,
         IssuedOn = CultureText.ParseDate(IssuedOn) ?? DateTime.Today,
         DueOn = CultureText.ParseDate(DueOn) ?? DateTime.Today,
         Currency = _editing.Currency,
@@ -410,6 +438,7 @@ public partial class InvoiceEditorViewModel : PageViewModel
     {
         ValidationMessage = Validate();
         SaveCommand.NotifyCanExecuteChanged();
+        ExportPdfCommand.NotifyCanExecuteChanged();
     }
 
     /// <summary>Empty when the invoice can be saved, otherwise the reason it cannot.</summary>

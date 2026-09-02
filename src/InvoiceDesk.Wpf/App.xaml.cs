@@ -7,6 +7,7 @@ using InvoiceDesk.Wpf.ViewModels;
 using InvoiceDesk.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuestPDF.Infrastructure;
 using Serilog;
 
 namespace InvoiceDesk.Wpf;
@@ -18,6 +19,7 @@ public partial class App : Application
     public App()
     {
         LoggingSetup.Configure();
+        QuestPDF.Settings.License = LicenseType.Community;
 
         AppDomain.CurrentDomain.UnhandledException += OnDomainUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
@@ -29,6 +31,7 @@ public partial class App : Application
                 services.AddSingleton<SettingsService>();
                 services.AddSingleton<ConfirmationService>();
                 services.AddSingleton<StorageService>();
+                services.AddSingleton<InvoicePdfService>();
                 services.AddSingleton<ThemeService>();
                 services.AddSingleton<LocalizationService>();
                 services.AddSingleton<NavigationService>();

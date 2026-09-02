@@ -103,9 +103,14 @@
                                    Text="{Binding StatusMessage}" />
                     </StackPanel>
 
-                    <Button HorizontalAlignment="Right" Style="{StaticResource PrimaryButton}"
-                            Command="{Binding SaveCommand}"
-                            Content="{loc:Text InvoiceEditor_Save}" />
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
+                                Command="{Binding ExportPdfCommand}"
+                                Content="{loc:Text InvoiceEditor_ExportPdf}" />
+                        <Button Style="{StaticResource PrimaryButton}"
+                                Command="{Binding SaveCommand}"
+                                Content="{loc:Text InvoiceEditor_Save}" />
+                    </StackPanel>
                 </Grid>
             </Border>
 

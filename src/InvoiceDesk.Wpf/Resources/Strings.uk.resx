@@ -416,6 +416,12 @@
   <data name="Invoices_Open" xml:space="preserve">
     <value>Відкрити</value>
   </data>
+  <data name="Invoices_ExportPdf" xml:space="preserve">
+    <value>Експорт у PDF</value>
+  </data>
+  <data name="Invoices_PdfExported" xml:space="preserve">
+    <value>{0} експортовано у PDF.</value>
+  </data>
   <data name="InvoiceEditor_Title" xml:space="preserve">
     <value>Рахунок</value>
   </data>
@@ -430,6 +436,9 @@
   </data>
   <data name="InvoiceEditor_Save" xml:space="preserve">
     <value>Зберегти</value>
+  </data>
+  <data name="InvoiceEditor_ExportPdf" xml:space="preserve">
+    <value>Експорт у PDF</value>
   </data>
   <data name="InvoiceEditor_ReadOnlyHint" xml:space="preserve">
     <value>Рахунок уже надіслано, тож змінити його не можна. Натомість зафіксуйте оплату.</value>
@@ -505,6 +514,24 @@
   </data>
   <data name="InvoiceEditor_Saved" xml:space="preserve">
     <value>{0} збережено.</value>
+  </data>
+  <data name="InvoiceEditor_PdfExported" xml:space="preserve">
+    <value>Збережено як {0}.</value>
+  </data>
+  <data name="InvoicePdf_Title" xml:space="preserve">
+    <value>РАХУНОК</value>
+  </data>
+  <data name="InvoicePdf_BillTo" xml:space="preserve">
+    <value>Платник</value>
+  </data>
+  <data name="InvoicePdf_TaxNumber" xml:space="preserve">
+    <value>Код: {0}</value>
+  </data>
+  <data name="InvoicePdf_Issued" xml:space="preserve">
+    <value>Видано: {0}</value>
+  </data>
+  <data name="InvoicePdf_Due" xml:space="preserve">
+    <value>Термін оплати: {0}</value>
   </data>
   <data name="InvoiceEditor_NumberRequired" xml:space="preserve">
     <value>Рахунок потребує номера.</value>

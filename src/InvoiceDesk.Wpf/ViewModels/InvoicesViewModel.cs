@@ -28,6 +28,8 @@ public partial class InvoicesViewModel : PageViewModel
 
     private readonly SettingsService _settings;
 
+    private readonly InvoicePdfService _pdf;
+
     private readonly NavigationService _navigation;
 
     private List<Invoice> _loaded = [];
@@ -61,6 +63,7 @@ public partial class InvoicesViewModel : PageViewModel
         InvoiceEditorViewModel editor,
         PaymentsViewModel payments,
         SettingsService settings,
+        InvoicePdfService pdf,
         NavigationService navigation)
     {
         _store = store;
@@ -68,6 +71,7 @@ public partial class InvoicesViewModel : PageViewModel
         _editor = editor;
         _payments = payments;
         _settings = settings;
+        _pdf = pdf;
         _navigation = navigation;
 
         _selectedStatus = StatusFilterOption.All();
@@ -135,6 +139,33 @@ public partial class InvoicesViewModel : PageViewModel
         DeleteDraftCommand.NotifyCanExecuteChanged();
         OpenInvoiceCommand.NotifyCanExecuteChanged();
         RecordPaymentCommand.NotifyCanExecuteChanged();
+        ExportPdfCommand.NotifyCanExecuteChanged();
+    }
+
+    /// <summary>Exports the selected invoice without leaving the list.</summary>
+    [RelayCommand(CanExecute = nameof(CanOpenInvoice))]
+    private void ExportPdf()
+    {
+        var invoice = LoadedSelection();
+
+        if (invoice is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var path = _pdf.Export(invoice);
+
+            StatusMessage = path is null
+                ? string.Empty
+                : LocalizedStrings.Format("Invoices_PdfExported", invoice.Number);
+        }
+        catch (Exception exception)
+        {
+            Log.Error(exception, "Failed to export invoice {Number} to PDF", invoice.Number);
+            StatusMessage = exception.Message;
+        }
     }
 
     /// <summary>Opens the payments screen with this invoice already picked.</summary>
