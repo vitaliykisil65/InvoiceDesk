@@ -362,6 +362,9 @@
   <data name="Invoices_MarkAsSent" xml:space="preserve">
     <value>Позначити надісланим</value>
   </data>
+  <data name="Invoices_RecordPayment" xml:space="preserve">
+    <value>Внести оплату</value>
+  </data>
   <data name="Invoices_DeleteDraft" xml:space="preserve">
     <value>Видалити чернетку</value>
   </data>
@@ -403,9 +406,6 @@
   </data>
   <data name="Placeholder_Planned" xml:space="preserve">
     <value>Заплановано на один з наступних етапів</value>
-  </data>
-  <data name="Placeholder_Payments" xml:space="preserve">
-    <value>Оплати, отримані за відкритими рахунками.</value>
   </data>
   <data name="Placeholder_Reports" xml:space="preserve">
     <value>Звіти про дохід, податки та клієнтів з експортом.</value>
@@ -529,5 +529,75 @@
   </data>
   <data name="InvoiceEditor_LineInvalid" xml:space="preserve">
     <value>Рядок {0} потребує опису, кількості понад нуль і ціни.</value>
+  </data>
+
+  <data name="Payments_SearchPlaceholder" xml:space="preserve">
+    <value>Пошук за номером або клієнтом</value>
+  </data>
+  <data name="Payments_Delete" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="Payments_ColumnInvoice" xml:space="preserve">
+    <value>Рахунок</value>
+  </data>
+  <data name="Payments_ColumnClient" xml:space="preserve">
+    <value>Клієнт</value>
+  </data>
+  <data name="Payments_ColumnDate" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Payments_ColumnAmount" xml:space="preserve">
+    <value>Сума</value>
+  </data>
+  <data name="Payments_ColumnMethod" xml:space="preserve">
+    <value>Спосіб</value>
+  </data>
+  <data name="Payments_Empty" xml:space="preserve">
+    <value>Немає оплат за заданими умовами.</value>
+  </data>
+  <data name="Payments_Count" xml:space="preserve">
+    <value>{0} оплат</value>
+  </data>
+  <data name="Payments_NewTitle" xml:space="preserve">
+    <value>Внести оплату</value>
+  </data>
+  <data name="Payments_Invoice" xml:space="preserve">
+    <value>Рахунок</value>
+  </data>
+  <data name="Payments_InvoiceOption" xml:space="preserve">
+    <value>{0} — {1} (залишок {2})</value>
+  </data>
+  <data name="Payments_DateHint" xml:space="preserve">
+    <value>Дата оплати ({0})</value>
+  </data>
+  <data name="Payments_Amount" xml:space="preserve">
+    <value>Сума</value>
+  </data>
+  <data name="Payments_Method" xml:space="preserve">
+    <value>Спосіб оплати</value>
+  </data>
+  <data name="Payments_Reference" xml:space="preserve">
+    <value>Референс</value>
+  </data>
+  <data name="Payments_Save" xml:space="preserve">
+    <value>Зберегти оплату</value>
+  </data>
+  <data name="Payments_Saved" xml:space="preserve">
+    <value>Оплату внесено для {0}.</value>
+  </data>
+  <data name="Payments_DeleteConfirm" xml:space="preserve">
+    <value>Видалити цю оплату за {0}? Цю дію не можна скасувати.</value>
+  </data>
+  <data name="Payments_DeletedStatus" xml:space="preserve">
+    <value>Оплату видалено.</value>
+  </data>
+  <data name="Payments_InvoiceRequired" xml:space="preserve">
+    <value>Виберіть рахунок, за яким внесено оплату.</value>
+  </data>
+  <data name="Payments_DateInvalid" xml:space="preserve">
+    <value>Введіть коректну дату.</value>
+  </data>
+  <data name="Payments_AmountInvalid" xml:space="preserve">
+    <value>Введіть суму більшу за нуль.</value>
   </data>
 </root>

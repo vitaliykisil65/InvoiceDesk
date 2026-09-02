@@ -29,6 +29,7 @@ public partial class App : Application
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<ClientsViewModel>();
                 services.AddSingleton<InvoicesViewModel>();
+                services.AddSingleton<PaymentsViewModel>();
                 services.AddSingleton<ProductsViewModel>();
                 services.AddSingleton<InvoiceEditorViewModel>();
                 services.AddSingleton<SettingsViewModel>();

@@ -36,6 +36,7 @@ public partial class ShellViewModel : ObservableObject
         InvoicesViewModel invoices,
         ClientsViewModel clients,
         ProductsViewModel products,
+        PaymentsViewModel payments,
         InvoiceEditorViewModel invoiceEditor,
         SettingsViewModel settings,
         ThemeService themeService,
@@ -51,7 +52,7 @@ public partial class ShellViewModel : ObservableObject
             invoices,
             clients,
             products,
-            new PlaceholderViewModel("Nav_Payments", "", "Placeholder_Payments"),
+            payments,
             new PlaceholderViewModel("Nav_Reports", "", "Placeholder_Reports"),
             settings
         ];

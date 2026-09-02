@@ -8,6 +8,9 @@ namespace InvoiceDesk.Domain.Abstractions;
 /// </summary>
 public interface IPaymentStore
 {
+    /// <summary>Every payment with its invoice and client, most recent first.</summary>
+    Task<IReadOnlyList<Payment>> GetAsync(CancellationToken cancellationToken = default);
+
     Task<int> AddAsync(Payment payment, CancellationToken cancellationToken = default);
 
     Task DeleteAsync(int paymentId, CancellationToken cancellationToken = default);

@@ -73,6 +73,9 @@
                             Command="{Binding MarkAsSentCommand}"
                             Content="{loc:Text Invoices_MarkAsSent}" />
                     <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
+                            Command="{Binding RecordPaymentCommand}"
+                            Content="{loc:Text Invoices_RecordPayment}" />
+                    <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
                             Command="{Binding DeleteDraftCommand}"
                             Content="{loc:Text Invoices_DeleteDraft}" />
                     <Button Style="{StaticResource PrimaryButton}"

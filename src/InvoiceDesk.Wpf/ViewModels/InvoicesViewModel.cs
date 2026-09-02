@@ -23,6 +23,8 @@ public partial class InvoicesViewModel : PageViewModel
 
     private readonly InvoiceEditorViewModel _editor;
 
+    private readonly PaymentsViewModel _payments;
+
     private readonly NavigationService _navigation;
 
     private List<Invoice> _loaded = [];
@@ -54,11 +56,13 @@ public partial class InvoicesViewModel : PageViewModel
         IInvoiceStore store,
         ConfirmationService confirmation,
         InvoiceEditorViewModel editor,
+        PaymentsViewModel payments,
         NavigationService navigation)
     {
         _store = store;
         _confirmation = confirmation;
         _editor = editor;
+        _payments = payments;
         _navigation = navigation;
 
         _selectedStatus = StatusFilterOption.All();
@@ -125,7 +129,23 @@ public partial class InvoicesViewModel : PageViewModel
         MarkAsSentCommand.NotifyCanExecuteChanged();
         DeleteDraftCommand.NotifyCanExecuteChanged();
         OpenInvoiceCommand.NotifyCanExecuteChanged();
+        RecordPaymentCommand.NotifyCanExecuteChanged();
     }
+
+    /// <summary>Opens the payments screen with this invoice already picked.</summary>
+    [RelayCommand(CanExecute = nameof(CanRecordPayment))]
+    private void RecordPayment()
+    {
+        if (SelectedInvoice is null)
+        {
+            return;
+        }
+
+        _payments.Open(SelectedInvoice.Id);
+        _navigation.GoTo(_payments);
+    }
+
+    private bool CanRecordPayment() => SelectedInvoice is { IsDraft: false };
 
     /// <summary>Starts a draft in the editor; the list reloads on the way back.</summary>
     [RelayCommand]
@@ -288,7 +308,7 @@ public partial class InvoicesViewModel : PageViewModel
         }
 
         SelectedClient = ClientOptions.FirstOrDefault(option => option.ClientId == selectedId)
-            ?? ClientOptions[0];
+                         ?? ClientOptions[0];
     }
 
     private static string FormatMoney(decimal amount) =>

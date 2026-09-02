@@ -43,3 +43,6 @@ desktop.ini
 *.db
 *.db-shm
 *.db-wal
+
+## Local working notes
+PLAN.md

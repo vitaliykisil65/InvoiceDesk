@@ -117,9 +117,6 @@
   <data name="Placeholder_Planned" xml:space="preserve">
     <value>Planned for an upcoming milestone</value>
   </data>
-  <data name="Placeholder_Payments" xml:space="preserve">
-    <value>Payments received against open invoices.</value>
-  </data>
   <data name="Placeholder_Reports" xml:space="preserve">
     <value>Revenue, tax and client reports with export.</value>
   </data>
@@ -376,6 +373,9 @@
   <data name="Invoices_MarkAsSent" xml:space="preserve">
     <value>Mark as sent</value>
   </data>
+  <data name="Invoices_RecordPayment" xml:space="preserve">
+    <value>Record payment</value>
+  </data>
   <data name="Invoices_DeleteDraft" xml:space="preserve">
     <value>Delete draft</value>
   </data>
@@ -534,5 +534,75 @@
   </data>
   <data name="InvoiceEditor_LineInvalid" xml:space="preserve">
     <value>Line {0} needs a description, a quantity above zero, and a price.</value>
+  </data>
+
+  <data name="Payments_SearchPlaceholder" xml:space="preserve">
+    <value>Search by number or client</value>
+  </data>
+  <data name="Payments_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Payments_ColumnInvoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="Payments_ColumnClient" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="Payments_ColumnDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Payments_ColumnAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Payments_ColumnMethod" xml:space="preserve">
+    <value>Method</value>
+  </data>
+  <data name="Payments_Empty" xml:space="preserve">
+    <value>No payments match the filters.</value>
+  </data>
+  <data name="Payments_Count" xml:space="preserve">
+    <value>{0} payments</value>
+  </data>
+  <data name="Payments_NewTitle" xml:space="preserve">
+    <value>Record a payment</value>
+  </data>
+  <data name="Payments_Invoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="Payments_InvoiceOption" xml:space="preserve">
+    <value>{0} — {1} ({2} outstanding)</value>
+  </data>
+  <data name="Payments_DateHint" xml:space="preserve">
+    <value>Paid on ({0})</value>
+  </data>
+  <data name="Payments_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Payments_Method" xml:space="preserve">
+    <value>Method</value>
+  </data>
+  <data name="Payments_Reference" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="Payments_Save" xml:space="preserve">
+    <value>Save payment</value>
+  </data>
+  <data name="Payments_Saved" xml:space="preserve">
+    <value>Payment recorded for {0}.</value>
+  </data>
+  <data name="Payments_DeleteConfirm" xml:space="preserve">
+    <value>Delete this payment for {0}? This cannot be undone.</value>
+  </data>
+  <data name="Payments_DeletedStatus" xml:space="preserve">
+    <value>Payment deleted.</value>
+  </data>
+  <data name="Payments_InvoiceRequired" xml:space="preserve">
+    <value>Pick the invoice this payment is for.</value>
+  </data>
+  <data name="Payments_DateInvalid" xml:space="preserve">
+    <value>Enter a valid date.</value>
+  </data>
+  <data name="Payments_AmountInvalid" xml:space="preserve">
+    <value>Enter an amount above zero.</value>
   </data>
 </root>

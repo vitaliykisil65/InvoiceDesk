@@ -7,6 +7,8 @@ public class Payment
 
     public int InvoiceId { get; set; }
 
+    public Invoice? Invoice { get; set; }
+
     public DateTime PaidOn { get; set; }
 
     public decimal Amount { get; set; }

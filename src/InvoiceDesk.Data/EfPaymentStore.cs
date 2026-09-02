@@ -14,6 +14,18 @@ public class EfPaymentStore : IPaymentStore
         _contextFactory = contextFactory;
     }
 
+    public async Task<IReadOnlyList<Payment>> GetAsync(CancellationToken cancellationToken = default)
+    {
+        await using var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+
+        return await context.Payments
+            .AsNoTracking()
+            .Include(payment => payment.Invoice!)
+            .ThenInclude(invoice => invoice.Client)
+            .OrderByDescending(payment => payment.PaidOn)
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task<int> AddAsync(Payment payment, CancellationToken cancellationToken = default)
     {
         await using var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
