@@ -19,6 +19,7 @@ public partial class ShellViewModel : ObservableObject
 
     public ShellViewModel(
         DashboardViewModel dashboard,
+        InvoicesViewModel invoices,
         ClientsViewModel clients,
         ProductsViewModel products,
         SettingsViewModel settings,
@@ -30,7 +31,7 @@ public partial class ShellViewModel : ObservableObject
         Pages =
         [
             dashboard,
-            new PlaceholderViewModel("Nav_Invoices", "", "Placeholder_Invoices"),
+            invoices,
             clients,
             products,
             new PlaceholderViewModel("Nav_Payments", "", "Placeholder_Payments"),

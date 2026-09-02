@@ -347,4 +347,58 @@
   <data name="Products_ArchivedTag" xml:space="preserve">
     <value>В архіві</value>
   </data>
+  <data name="Common_ConfirmTitle" xml:space="preserve">
+    <value>InvoiceDesk</value>
+  </data>
+  <data name="Invoices_SearchPlaceholder" xml:space="preserve">
+    <value>Пошук за номером або клієнтом</value>
+  </data>
+  <data name="Invoices_AnyStatus" xml:space="preserve">
+    <value>Будь-який статус</value>
+  </data>
+  <data name="Invoices_AnyClient" xml:space="preserve">
+    <value>Усі клієнти</value>
+  </data>
+  <data name="Invoices_MarkAsSent" xml:space="preserve">
+    <value>Позначити надісланим</value>
+  </data>
+  <data name="Invoices_DeleteDraft" xml:space="preserve">
+    <value>Видалити чернетку</value>
+  </data>
+  <data name="Invoices_ColumnNumber" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="Invoices_ColumnClient" xml:space="preserve">
+    <value>Клієнт</value>
+  </data>
+  <data name="Invoices_ColumnIssued" xml:space="preserve">
+    <value>Виставлено</value>
+  </data>
+  <data name="Invoices_ColumnDue" xml:space="preserve">
+    <value>Термін</value>
+  </data>
+  <data name="Invoices_ColumnTotal" xml:space="preserve">
+    <value>Сума</value>
+  </data>
+  <data name="Invoices_ColumnOutstanding" xml:space="preserve">
+    <value>Залишок</value>
+  </data>
+  <data name="Invoices_ColumnStatus" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="Invoices_Summary" xml:space="preserve">
+    <value>Рахунків: {0} · виставлено {1} · не оплачено {2}</value>
+  </data>
+  <data name="Invoices_Empty" xml:space="preserve">
+    <value>Жоден рахунок не підходить під фільтри.</value>
+  </data>
+  <data name="Invoices_SentStatus" xml:space="preserve">
+    <value>{0} надіслано, очікується оплата.</value>
+  </data>
+  <data name="Invoices_DeleteConfirm" xml:space="preserve">
+    <value>Видалити чернетку {0}? Дію не можна скасувати.</value>
+  </data>
+  <data name="Invoices_DeletedStatus" xml:space="preserve">
+    <value>Чернетку {0} видалено.</value>
+  </data>
 </root>

@@ -3,56 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:domain="clr-namespace:InvoiceDesk.Domain.Entities;assembly=InvoiceDesk.Domain"
              xmlns:loc="clr-namespace:InvoiceDesk.Wpf.Localization"
              xmlns:vm="clr-namespace:InvoiceDesk.Wpf.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:DashboardViewModel}"
              mc:Ignorable="d">
-
-    <UserControl.Resources>
-
-        <!-- Status pill: colour comes from the invoice state -->
-        <Style x:Key="StatusPill" TargetType="Border">
-            <Setter Property="CornerRadius" Value="6" />
-            <Setter Property="Padding" Value="8,2" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Background" Value="{DynamicResource SurfaceMutedBrush}" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Status}" Value="{x:Static domain:InvoiceStatus.Sent}">
-                    <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Status}" Value="{x:Static domain:InvoiceStatus.PartiallyPaid}">
-                    <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Status}" Value="{x:Static domain:InvoiceStatus.Paid}">
-                    <Setter Property="Background" Value="{DynamicResource SuccessSoftBrush}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Status}" Value="{x:Static domain:InvoiceStatus.Overdue}">
-                    <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="StatusPillText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="11" />
-            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Status}" Value="{x:Static domain:InvoiceStatus.Sent}">
-                    <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Status}" Value="{x:Static domain:InvoiceStatus.PartiallyPaid}">
-                    <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Status}" Value="{x:Static domain:InvoiceStatus.Paid}">
-                    <Setter Property="Foreground" Value="{DynamicResource SuccessTextBrush}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Status}" Value="{x:Static domain:InvoiceStatus.Overdue}">
-                    <Setter Property="Foreground" Value="{DynamicResource DangerTextBrush}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>

@@ -9,15 +9,23 @@ public class InvoiceRowViewModel
 {
     public InvoiceRowViewModel(Invoice invoice)
     {
+        Id = invoice.Id;
         Number = invoice.Number;
         ClientName = invoice.Client?.Name ?? string.Empty;
         Status = invoice.Status;
+        IsDraft = invoice.Status == InvoiceStatus.Draft;
         StatusText = LocalizedStrings.Get(StatusKey(invoice.Status));
-        DueText = invoice.Status == InvoiceStatus.Draft
+        IssuedText = invoice.IssuedOn.ToString("dd MMM yyyy", CultureInfo.CurrentUICulture);
+
+        // A draft has not been sent, so it owes nothing and is due nowhere.
+        DueText = IsDraft
             ? "—"
             : invoice.DueOn.ToString("dd MMM", CultureInfo.CurrentUICulture);
-        TotalText = string.Create(CultureInfo.CurrentUICulture, $"€{invoice.GrandTotal:N0}");
+        TotalText = FormatMoney(invoice.GrandTotal);
+        OutstandingText = invoice.OutstandingAmount > 0m ? FormatMoney(invoice.OutstandingAmount) : "—";
     }
+
+    public int Id { get; }
 
     public string Number { get; }
 
@@ -25,11 +33,20 @@ public class InvoiceRowViewModel
 
     public InvoiceStatus Status { get; }
 
+    public bool IsDraft { get; }
+
     public string StatusText { get; }
+
+    public string IssuedText { get; }
 
     public string DueText { get; }
 
     public string TotalText { get; }
+
+    public string OutstandingText { get; }
+
+    private static string FormatMoney(decimal amount) =>
+        string.Create(CultureInfo.CurrentUICulture, $"€{amount:N2}");
 
     private static string StatusKey(InvoiceStatus status) => status switch
     {

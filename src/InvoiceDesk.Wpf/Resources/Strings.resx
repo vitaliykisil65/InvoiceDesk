@@ -117,9 +117,6 @@
   <data name="Placeholder_Planned" xml:space="preserve">
     <value>Planned for an upcoming milestone</value>
   </data>
-  <data name="Placeholder_Invoices" xml:space="preserve">
-    <value>Invoice list with filters, bulk actions and PDF export.</value>
-  </data>
   <data name="Placeholder_Payments" xml:space="preserve">
     <value>Payments received against open invoices.</value>
   </data>
@@ -363,5 +360,59 @@
   </data>
   <data name="Products_ArchivedTag" xml:space="preserve">
     <value>Archived</value>
+  </data>
+  <data name="Common_ConfirmTitle" xml:space="preserve">
+    <value>InvoiceDesk</value>
+  </data>
+  <data name="Invoices_SearchPlaceholder" xml:space="preserve">
+    <value>Search by number or client</value>
+  </data>
+  <data name="Invoices_AnyStatus" xml:space="preserve">
+    <value>Any status</value>
+  </data>
+  <data name="Invoices_AnyClient" xml:space="preserve">
+    <value>All clients</value>
+  </data>
+  <data name="Invoices_MarkAsSent" xml:space="preserve">
+    <value>Mark as sent</value>
+  </data>
+  <data name="Invoices_DeleteDraft" xml:space="preserve">
+    <value>Delete draft</value>
+  </data>
+  <data name="Invoices_ColumnNumber" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Invoices_ColumnClient" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="Invoices_ColumnIssued" xml:space="preserve">
+    <value>Issued</value>
+  </data>
+  <data name="Invoices_ColumnDue" xml:space="preserve">
+    <value>Due</value>
+  </data>
+  <data name="Invoices_ColumnTotal" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Invoices_ColumnOutstanding" xml:space="preserve">
+    <value>Outstanding</value>
+  </data>
+  <data name="Invoices_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Invoices_Summary" xml:space="preserve">
+    <value>{0} invoices · issued {1} · outstanding {2}</value>
+  </data>
+  <data name="Invoices_Empty" xml:space="preserve">
+    <value>No invoices match the filters.</value>
+  </data>
+  <data name="Invoices_SentStatus" xml:space="preserve">
+    <value>{0} is now sent and due for payment.</value>
+  </data>
+  <data name="Invoices_DeleteConfirm" xml:space="preserve">
+    <value>Delete draft {0}? This cannot be undone.</value>
+  </data>
+  <data name="Invoices_DeletedStatus" xml:space="preserve">
+    <value>Draft {0} deleted.</value>
   </data>
 </root>

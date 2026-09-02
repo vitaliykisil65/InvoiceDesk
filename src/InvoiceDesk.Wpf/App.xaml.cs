@@ -19,6 +19,7 @@ public partial class App : Application
             .ConfigureServices(services =>
             {
                 services.AddSingleton<SettingsService>();
+                services.AddSingleton<ConfirmationService>();
                 services.AddSingleton<StorageService>();
                 services.AddSingleton<ThemeService>();
                 services.AddSingleton<LocalizationService>();
@@ -26,6 +27,7 @@ public partial class App : Application
 
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<ClientsViewModel>();
+                services.AddSingleton<InvoicesViewModel>();
                 services.AddSingleton<ProductsViewModel>();
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<ShellViewModel>();
