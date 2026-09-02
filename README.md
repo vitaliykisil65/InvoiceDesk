@@ -31,6 +31,11 @@ not to ship a commercial product.
   number typed into the search box, with what is issued and what is still owed
   totalled underneath. Drafts can be sent or deleted; anything the client has
   seen stays on the books.
+- **Invoice editor** — the client, the dates and the positions being billed, with
+  lines typed by hand or pulled off the price list, and net, discount, VAT and
+  the outstanding balance recalculated as the numbers are entered. Invoice
+  numbers are issued automatically and restart every January. Once an invoice
+  has been sent it opens read-only: the client already holds that document.
 - **Price list** — the services and products invoices are billed from, each with
   its unit, price and VAT rate, entered in the language the interface is in.
 - **Dashboard** — revenue for the current month, outstanding and overdue totals,
@@ -64,11 +69,11 @@ not to ship a commercial product.
 Working today: shell and navigation, theming, localization, settings, a SQLite
 database created and migrated on first launch, a dashboard driven by it, and a
 clients and price list screens where records are created, edited and archived,
-and an invoice list with filters and draft actions. The money, status and
-invoice numbering rules are covered by unit tests.
+an invoice list with filters and draft actions, and an invoice editor that
+writes lines and totals. The money, status and invoice numbering rules are
+covered by unit tests.
 
-Next: the invoice editor, payments, reports, PDF export, backups, and a Windows
-installer.
+Next: payments, reports, PDF export, backups, and a Windows installer.
 
 ## Build and run
 

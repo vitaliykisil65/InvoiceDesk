@@ -21,6 +21,10 @@ public partial class InvoicesViewModel : PageViewModel
 
     private readonly ConfirmationService _confirmation;
 
+    private readonly InvoiceEditorViewModel _editor;
+
+    private readonly NavigationService _navigation;
+
     private List<Invoice> _loaded = [];
 
     /// <summary>Totals of what the filters currently leave on screen.</summary>
@@ -46,10 +50,16 @@ public partial class InvoicesViewModel : PageViewModel
     [ObservableProperty]
     private bool _isBusy;
 
-    public InvoicesViewModel(IInvoiceStore store, ConfirmationService confirmation)
+    public InvoicesViewModel(
+        IInvoiceStore store,
+        ConfirmationService confirmation,
+        InvoiceEditorViewModel editor,
+        NavigationService navigation)
     {
         _store = store;
         _confirmation = confirmation;
+        _editor = editor;
+        _navigation = navigation;
 
         _selectedStatus = StatusFilterOption.All();
         _selectedClient = ClientFilterOption.All();
@@ -114,7 +124,34 @@ public partial class InvoicesViewModel : PageViewModel
         StatusMessage = string.Empty;
         MarkAsSentCommand.NotifyCanExecuteChanged();
         DeleteDraftCommand.NotifyCanExecuteChanged();
+        OpenInvoiceCommand.NotifyCanExecuteChanged();
     }
+
+    /// <summary>Starts a draft in the editor; the list reloads on the way back.</summary>
+    [RelayCommand]
+    private void NewInvoice()
+    {
+        _editor.Open(null);
+        _navigation.GoTo(_editor);
+    }
+
+    /// <summary>
+    /// Opens the selected invoice. Anything that was sent opens read-only, so
+    /// this is as much a way to look at an invoice as a way to change one.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanOpenInvoice))]
+    private void OpenInvoice()
+    {
+        if (SelectedInvoice is null)
+        {
+            return;
+        }
+
+        _editor.Open(SelectedInvoice.Id);
+        _navigation.GoTo(_editor);
+    }
+
+    private bool CanOpenInvoice() => SelectedInvoice is not null;
 
     /// <summary>Hands a draft over to the client: from here on it is owed.</summary>
     [RelayCommand(CanExecute = nameof(CanActOnDraft))]

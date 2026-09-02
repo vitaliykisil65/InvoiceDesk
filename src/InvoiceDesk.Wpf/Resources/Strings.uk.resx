@@ -401,4 +401,133 @@
   <data name="Invoices_DeletedStatus" xml:space="preserve">
     <value>Чернетку {0} видалено.</value>
   </data>
+  <data name="Placeholder_Planned" xml:space="preserve">
+    <value>Заплановано на один з наступних етапів</value>
+  </data>
+  <data name="Placeholder_Payments" xml:space="preserve">
+    <value>Оплати, отримані за відкритими рахунками.</value>
+  </data>
+  <data name="Placeholder_Reports" xml:space="preserve">
+    <value>Звіти про дохід, податки та клієнтів з експортом.</value>
+  </data>
+  <data name="Invoices_New" xml:space="preserve">
+    <value>Новий рахунок</value>
+  </data>
+  <data name="Invoices_Open" xml:space="preserve">
+    <value>Відкрити</value>
+  </data>
+  <data name="InvoiceEditor_Title" xml:space="preserve">
+    <value>Рахунок</value>
+  </data>
+  <data name="InvoiceEditor_NewTitle" xml:space="preserve">
+    <value>Новий рахунок</value>
+  </data>
+  <data name="InvoiceEditor_EditTitle" xml:space="preserve">
+    <value>Рахунок {0}</value>
+  </data>
+  <data name="InvoiceEditor_Back" xml:space="preserve">
+    <value>Назад до рахунків</value>
+  </data>
+  <data name="InvoiceEditor_Save" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="InvoiceEditor_ReadOnlyHint" xml:space="preserve">
+    <value>Рахунок уже надіслано, тож змінити його не можна. Натомість зафіксуйте оплату.</value>
+  </data>
+  <data name="InvoiceEditor_Client" xml:space="preserve">
+    <value>Клієнт</value>
+  </data>
+  <data name="InvoiceEditor_Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="InvoiceEditor_Issued" xml:space="preserve">
+    <value>Виставлено</value>
+  </data>
+  <data name="InvoiceEditor_Due" xml:space="preserve">
+    <value>Оплатити до</value>
+  </data>
+  <data name="InvoiceEditor_DateHint" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="InvoiceEditor_Notes" xml:space="preserve">
+    <value>Примітки</value>
+  </data>
+  <data name="InvoiceEditor_Discount" xml:space="preserve">
+    <value>Знижка, %</value>
+  </data>
+  <data name="InvoiceEditor_Lines" xml:space="preserve">
+    <value>Позиції рахунку</value>
+  </data>
+  <data name="InvoiceEditor_LineDescription" xml:space="preserve">
+    <value>Опис</value>
+  </data>
+  <data name="InvoiceEditor_LineUnit" xml:space="preserve">
+    <value>Одиниця</value>
+  </data>
+  <data name="InvoiceEditor_LineQuantity" xml:space="preserve">
+    <value>К-сть</value>
+  </data>
+  <data name="InvoiceEditor_LineUnitPrice" xml:space="preserve">
+    <value>Ціна</value>
+  </data>
+  <data name="InvoiceEditor_LineTaxRate" xml:space="preserve">
+    <value>ПДВ, %</value>
+  </data>
+  <data name="InvoiceEditor_LineNet" xml:space="preserve">
+    <value>Сума</value>
+  </data>
+  <data name="InvoiceEditor_AddLine" xml:space="preserve">
+    <value>Додати рядок</value>
+  </data>
+  <data name="InvoiceEditor_AddFromPriceList" xml:space="preserve">
+    <value>Додати з прайсу</value>
+  </data>
+  <data name="InvoiceEditor_RemoveLine" xml:space="preserve">
+    <value>Вилучити рядок</value>
+  </data>
+  <data name="InvoiceEditor_Net" xml:space="preserve">
+    <value>Сума без ПДВ</value>
+  </data>
+  <data name="InvoiceEditor_DiscountTotal" xml:space="preserve">
+    <value>Знижка</value>
+  </data>
+  <data name="InvoiceEditor_Tax" xml:space="preserve">
+    <value>ПДВ</value>
+  </data>
+  <data name="InvoiceEditor_GrandTotal" xml:space="preserve">
+    <value>Разом</value>
+  </data>
+  <data name="InvoiceEditor_Paid" xml:space="preserve">
+    <value>Сплачено</value>
+  </data>
+  <data name="InvoiceEditor_Outstanding" xml:space="preserve">
+    <value>До сплати</value>
+  </data>
+  <data name="InvoiceEditor_Saved" xml:space="preserve">
+    <value>{0} збережено.</value>
+  </data>
+  <data name="InvoiceEditor_NumberRequired" xml:space="preserve">
+    <value>Рахунок потребує номера.</value>
+  </data>
+  <data name="InvoiceEditor_ClientRequired" xml:space="preserve">
+    <value>Оберіть клієнта, якому виставлено рахунок.</value>
+  </data>
+  <data name="InvoiceEditor_IssuedInvalid" xml:space="preserve">
+    <value>Не вдається прочитати дату виставлення.</value>
+  </data>
+  <data name="InvoiceEditor_DueInvalid" xml:space="preserve">
+    <value>Не вдається прочитати дату оплати.</value>
+  </data>
+  <data name="InvoiceEditor_DueBeforeIssued" xml:space="preserve">
+    <value>Термін оплати не може бути раніший за дату виставлення.</value>
+  </data>
+  <data name="InvoiceEditor_DiscountInvalid" xml:space="preserve">
+    <value>Знижка має бути від 0 до 100 відсотків.</value>
+  </data>
+  <data name="InvoiceEditor_LinesRequired" xml:space="preserve">
+    <value>Рахунок потребує щонайменше однієї позиції.</value>
+  </data>
+  <data name="InvoiceEditor_LineInvalid" xml:space="preserve">
+    <value>Рядок {0} потребує опису, кількості понад нуль і ціни.</value>
+  </data>
 </root>

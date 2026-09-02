@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceDesk.Domain.Abstractions;
@@ -179,8 +178,8 @@ public partial class ProductsViewModel : PageViewModel
             Name = Name.Trim(),
             Description = Trimmed(Description),
             Unit = Unit.Trim(),
-            UnitPrice = ParseNumber(UnitPrice) ?? 0m,
-            TaxRate = ParseNumber(TaxRate) ?? 0m
+            UnitPrice = CultureText.ParseNumber(UnitPrice) ?? 0m,
+            TaxRate = CultureText.ParseNumber(TaxRate) ?? 0m
         };
 
         try
@@ -273,8 +272,8 @@ public partial class ProductsViewModel : PageViewModel
         Name = product.Name;
         Description = product.Description ?? string.Empty;
         Unit = product.Unit;
-        UnitPrice = FormatNumber(product.UnitPrice);
-        TaxRate = FormatNumber(product.TaxRate);
+        UnitPrice = CultureText.FormatNumber(product.UnitPrice);
+        TaxRate = CultureText.FormatNumber(product.TaxRate);
 
         _isFillingForm = false;
 
@@ -306,30 +305,18 @@ public partial class ProductsViewModel : PageViewModel
             return LocalizedStrings.Get("Products_UnitRequired");
         }
 
-        if (ParseNumber(UnitPrice) is null or < 0m)
+        if (CultureText.ParseNumber(UnitPrice) is null or < 0m)
         {
             return LocalizedStrings.Get("Products_PriceInvalid");
         }
 
-        if (ParseNumber(TaxRate) is null or < 0m or > 100m)
+        if (CultureText.ParseNumber(TaxRate) is null or < 0m or > 100m)
         {
             return LocalizedStrings.Get("Products_TaxRateInvalid");
         }
 
         return string.Empty;
     }
-
-    /// <summary>
-    /// Amounts are typed in the interface language, so "1 234,50" is as valid as
-    /// "1,234.50" — whichever the current culture writes.
-    /// </summary>
-    private static decimal? ParseNumber(string value) =>
-        decimal.TryParse(value, NumberStyles.Number, CultureInfo.CurrentUICulture, out var number)
-            ? number
-            : null;
-
-    private static string FormatNumber(decimal value) =>
-        value.ToString("0.##", CultureInfo.CurrentUICulture);
 
     private static string? Trimmed(string value) =>
         string.IsNullOrWhiteSpace(value) ? null : value.Trim();

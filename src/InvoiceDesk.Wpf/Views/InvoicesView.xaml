@@ -67,11 +67,17 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
+                            Command="{Binding OpenInvoiceCommand}"
+                            Content="{loc:Text Invoices_Open}" />
+                    <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
                             Command="{Binding MarkAsSentCommand}"
                             Content="{loc:Text Invoices_MarkAsSent}" />
-                    <Button Style="{StaticResource SubtleButton}"
+                    <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
                             Command="{Binding DeleteDraftCommand}"
                             Content="{loc:Text Invoices_DeleteDraft}" />
+                    <Button Style="{StaticResource PrimaryButton}"
+                            Command="{Binding NewInvoiceCommand}"
+                            Content="{loc:Text Invoices_New}" />
                 </StackPanel>
             </Grid>
 
@@ -126,6 +132,10 @@
                          Background="Transparent" BorderThickness="0"
                          HorizontalContentAlignment="Stretch"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <!-- Double-clicking a row is the fastest way into the editor -->
+                    <ListBox.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenInvoiceCommand}" />
+                    </ListBox.InputBindings>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>

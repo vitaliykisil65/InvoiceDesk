@@ -1,0 +1,320 @@
+<UserControl x:Class="InvoiceDesk.Wpf.Views.InvoiceEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:loc="clr-namespace:InvoiceDesk.Wpf.Localization"
+             xmlns:vm="clr-namespace:InvoiceDesk.Wpf.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:InvoiceEditorViewModel}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        </Style>
+
+        <Style x:Key="FieldBox" TargetType="TextBox" BasedOn="{StaticResource SearchBox}">
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+
+        <Style x:Key="NotesBox" TargetType="TextBox" BasedOn="{StaticResource FieldBox}">
+            <Setter Property="Height" Value="60" />
+            <Setter Property="Padding" Value="10,6" />
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+        </Style>
+
+        <Style x:Key="LineHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+        </Style>
+
+        <Style x:Key="LineBox" TargetType="TextBox" BasedOn="{StaticResource SearchBox}">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+        </Style>
+
+        <Style x:Key="TotalLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="0,0,16,6" />
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        </Style>
+
+        <Style x:Key="TotalValue" TargetType="TextBlock" BasedOn="{StaticResource TotalLabel}">
+            <Setter Property="Margin" Value="0,0,0,6" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <Border Style="{StaticResource CardBorder}">
+        <DockPanel>
+
+            <!-- Header -->
+            <Grid DockPanel.Dock="Top" Margin="0,0,0,14">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource PageTitleText}" FontSize="16" VerticalAlignment="Center"
+                               Text="{Binding EditorTitle}" />
+                    <Border Style="{StaticResource StatusPill}" Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StatusPillText}" Text="{Binding StatusText}" />
+                    </Border>
+                </StackPanel>
+
+                <Button HorizontalAlignment="Right" Style="{StaticResource SubtleButton}"
+                        Command="{Binding BackCommand}"
+                        Content="{loc:Text InvoiceEditor_Back}" />
+            </Grid>
+
+            <!-- A sent invoice is a document the client already holds -->
+            <Border DockPanel.Dock="Top" CornerRadius="6" Padding="12,8" Margin="0,0,0,14"
+                    Background="{DynamicResource SurfaceMutedBrush}">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="False">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock FontSize="12" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           Text="{loc:Text InvoiceEditor_ReadOnlyHint}" />
+            </Border>
+
+            <!-- Actions and messages stay pinned under the form -->
+            <Border DockPanel.Dock="Bottom" BorderBrush="{DynamicResource BorderSubtleBrush}"
+                    BorderThickness="0,1,0,0" Padding="0,12,0,0" Margin="0,4,0,0">
+                <Grid>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock FontSize="12" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource DangerTextBrush}"
+                                   Text="{Binding ValidationMessage}" />
+                        <TextBlock FontSize="12" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TextMutedBrush}"
+                                   Text="{Binding StatusMessage}" />
+                    </StackPanel>
+
+                    <Button HorizontalAlignment="Right" Style="{StaticResource PrimaryButton}"
+                            Command="{Binding SaveCommand}"
+                            Content="{loc:Text InvoiceEditor_Save}" />
+                </Grid>
+            </Border>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,4,0" IsEnabled="{Binding IsEditable}">
+                    <!-- Who it goes to and when it is due -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="0">
+                            <TextBlock Style="{StaticResource FieldLabel}"
+                                       Text="{loc:Text InvoiceEditor_Client}" />
+                            <ComboBox Height="32" Margin="0,0,0,12"
+                                      ItemsSource="{Binding Clients}"
+                                      SelectedItem="{Binding SelectedClient}"
+                                      DisplayMemberPath="Name" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="2">
+                            <TextBlock Style="{StaticResource FieldLabel}"
+                                       Text="{loc:Text InvoiceEditor_Number}" />
+                            <TextBox Style="{StaticResource FieldBox}"
+                                     Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="4">
+                            <TextBlock Style="{StaticResource FieldLabel}"
+                                       Text="{loc:Text InvoiceEditor_Issued}" />
+                            <TextBox Style="{StaticResource FieldBox}" Tag="{Binding DateHint}"
+                                     Text="{Binding IssuedOn, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="6">
+                            <TextBlock Style="{StaticResource FieldLabel}"
+                                       Text="{loc:Text InvoiceEditor_Due}" />
+                            <TextBox Style="{StaticResource FieldBox}" Tag="{Binding DateHint}"
+                                     Text="{Binding DueOn, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
+                            <TextBlock Style="{StaticResource FieldLabel}"
+                                       Text="{loc:Text InvoiceEditor_Notes}" />
+                            <TextBox Style="{StaticResource NotesBox}"
+                                     Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="6">
+                            <TextBlock Style="{StaticResource FieldLabel}"
+                                       Text="{loc:Text InvoiceEditor_Discount}" />
+                            <TextBox Style="{StaticResource FieldBox}"
+                                     Text="{Binding DiscountPercent, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- What is being billed for -->
+                    <TextBlock Style="{StaticResource PageTitleText}" FontSize="14" Margin="0,4,0,8"
+                               Text="{loc:Text InvoiceEditor_Lines}" />
+
+                    <Border BorderBrush="{DynamicResource BorderSubtleBrush}" BorderThickness="0,1,0,1"
+                            Padding="0,7" Margin="0,0,0,6">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="110" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="110" />
+                                <ColumnDefinition Width="36" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Style="{StaticResource LineHeader}"
+                                       Text="{loc:Text InvoiceEditor_LineDescription}" />
+                            <TextBlock Grid.Column="1" Style="{StaticResource LineHeader}"
+                                       Text="{loc:Text InvoiceEditor_LineUnit}" />
+                            <TextBlock Grid.Column="2" Style="{StaticResource LineHeader}"
+                                       Text="{loc:Text InvoiceEditor_LineQuantity}" />
+                            <TextBlock Grid.Column="3" Style="{StaticResource LineHeader}"
+                                       Text="{loc:Text InvoiceEditor_LineUnitPrice}" />
+                            <TextBlock Grid.Column="4" Style="{StaticResource LineHeader}"
+                                       Text="{loc:Text InvoiceEditor_LineTaxRate}" />
+                            <TextBlock Grid.Column="5" Style="{StaticResource LineHeader}" TextAlignment="Right"
+                                       Margin="0,0,8,0"
+                                       Text="{loc:Text InvoiceEditor_LineNet}" />
+                        </Grid>
+                    </Border>
+
+                    <ItemsControl ItemsSource="{Binding Lines}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition Width="110" />
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition Width="110" />
+                                        <ColumnDefinition Width="36" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox Grid.Column="0" Style="{StaticResource LineBox}"
+                                             Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox Grid.Column="1" Style="{StaticResource LineBox}"
+                                             Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox Grid.Column="2" Style="{StaticResource LineBox}"
+                                             Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox Grid.Column="3" Style="{StaticResource LineBox}"
+                                             Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox Grid.Column="4" Style="{StaticResource LineBox}"
+                                             Text="{Binding TaxRate, UpdateSourceTrigger=PropertyChanged}" />
+
+                                    <TextBlock Grid.Column="5" FontSize="13" VerticalAlignment="Center"
+                                               TextAlignment="Right" Margin="0,0,8,0"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"
+                                               Text="{Binding NetText}" />
+
+                                    <Button Grid.Column="6" Style="{StaticResource IconButton}" Height="30"
+                                            Content="&#xE711;"
+                                            ToolTip="{loc:Text InvoiceEditor_RemoveLine}"
+                                            CommandParameter="{Binding}"
+                                            Command="{Binding DataContext.RemoveLineCommand,
+                                                RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Adding a position, by hand or off the price list -->
+                    <Grid Margin="0,6,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
+                                    Command="{Binding AddLineCommand}"
+                                    Content="{loc:Text InvoiceEditor_AddLine}" />
+                            <ComboBox Width="220" Height="32" Margin="0,0,8,0"
+                                      ItemsSource="{Binding Products}"
+                                      SelectedItem="{Binding SelectedProduct}"
+                                      DisplayMemberPath="Name" />
+                            <Button Style="{StaticResource SubtleButton}"
+                                    Command="{Binding AddFromPriceListCommand}"
+                                    Content="{loc:Text InvoiceEditor_AddFromPriceList}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- What it comes to -->
+                    <Border HorizontalAlignment="Right" Margin="0,16,0,0" CornerRadius="6" Padding="16,12"
+                            Background="{DynamicResource SurfaceMutedBrush}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="130" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TotalLabel}"
+                                       Text="{loc:Text InvoiceEditor_Net}" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource TotalValue}"
+                                       Text="{Binding NetText}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource TotalLabel}"
+                                       Text="{loc:Text InvoiceEditor_DiscountTotal}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource TotalValue}"
+                                       Text="{Binding DiscountText}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource TotalLabel}"
+                                       Text="{loc:Text InvoiceEditor_Tax}" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource TotalValue}"
+                                       Text="{Binding TaxText}" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource TotalLabel}"
+                                       FontWeight="SemiBold"
+                                       Text="{loc:Text InvoiceEditor_GrandTotal}" />
+                            <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource TotalValue}"
+                                       FontSize="15" FontWeight="SemiBold"
+                                       Text="{Binding GrandTotalText}" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource TotalLabel}"
+                                       Text="{loc:Text InvoiceEditor_Paid}" />
+                            <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource TotalValue}"
+                                       Text="{Binding PaidText}" />
+
+                            <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource TotalLabel}"
+                                       Margin="0,0,16,0"
+                                       Text="{loc:Text InvoiceEditor_Outstanding}" />
+                            <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource TotalValue}"
+                                       Margin="0" Text="{Binding OutstandingText}" />
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+    </Border>
+</UserControl>

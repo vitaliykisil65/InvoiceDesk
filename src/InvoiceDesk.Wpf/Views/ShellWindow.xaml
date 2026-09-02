@@ -73,7 +73,7 @@
                         </Border>
 
                         <ListBox ItemsSource="{Binding Pages}"
-                                 SelectedItem="{Binding CurrentPage}"
+                                 SelectedItem="{Binding SelectedPage}"
                                  ItemContainerStyle="{StaticResource NavigationItem}"
                                  Background="Transparent" BorderThickness="0" Margin="0,8"
                                  HorizontalContentAlignment="Stretch"
@@ -102,6 +102,7 @@
                                  Tag="{loc:Text Shell_SearchPlaceholder}" />
 
                         <Button Grid.Column="1" Style="{StaticResource PrimaryButton}" Margin="10,0,8,0"
+                                Command="{Binding NewInvoiceCommand}"
                                 Content="{loc:Text Shell_NewInvoice}" />
 
                         <Button Grid.Column="2" Style="{StaticResource IconButton}"

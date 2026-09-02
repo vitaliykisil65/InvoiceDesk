@@ -23,12 +23,14 @@ public partial class App : Application
                 services.AddSingleton<StorageService>();
                 services.AddSingleton<ThemeService>();
                 services.AddSingleton<LocalizationService>();
+                services.AddSingleton<NavigationService>();
                 services.AddInvoiceDeskData(AppPaths.DatabaseFile);
 
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<ClientsViewModel>();
                 services.AddSingleton<InvoicesViewModel>();
                 services.AddSingleton<ProductsViewModel>();
+                services.AddSingleton<InvoiceEditorViewModel>();
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<ShellViewModel>();
                 services.AddSingleton<ShellWindow>();

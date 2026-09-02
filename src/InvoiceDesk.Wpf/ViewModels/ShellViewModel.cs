@@ -11,8 +11,22 @@ public partial class ShellViewModel : ObservableObject
 {
     private readonly ThemeService _themeService;
 
+    private readonly InvoiceEditorViewModel _invoiceEditor;
+
+    /// <summary>Where "back" goes: the page the editor was opened from.</summary>
+    private PageViewModel? _returnTo;
+
+    /// <summary>What the content area shows; not every page is in the sidebar.</summary>
     [ObservableProperty]
     private PageViewModel _currentPage;
+
+    /// <summary>
+    /// What the sidebar has selected. It is separate from the current page
+    /// because the invoice editor has no sidebar entry, and a list box with a
+    /// selection it does not own writes null straight back into the binding.
+    /// </summary>
+    [ObservableProperty]
+    private PageViewModel? _selectedPage;
 
     [ObservableProperty]
     private string _searchText = string.Empty;
@@ -22,11 +36,14 @@ public partial class ShellViewModel : ObservableObject
         InvoicesViewModel invoices,
         ClientsViewModel clients,
         ProductsViewModel products,
+        InvoiceEditorViewModel invoiceEditor,
         SettingsViewModel settings,
         ThemeService themeService,
-        LocalizationService localizationService)
+        LocalizationService localizationService,
+        NavigationService navigationService)
     {
         _themeService = themeService;
+        _invoiceEditor = invoiceEditor;
 
         Pages =
         [
@@ -40,9 +57,13 @@ public partial class ShellViewModel : ObservableObject
         ];
 
         _currentPage = Pages[0];
+        _selectedPage = _currentPage;
 
         localizationService.LanguageChanged += (_, _) => OnLanguageChanged();
         themeService.ThemeChanged += (_, _) => OnPropertyChanged(nameof(ThemeGlyph));
+
+        navigationService.PageRequested += (_, page) => Show(page);
+        navigationService.BackRequested += (_, _) => Show(_returnTo ?? Pages[0]);
     }
 
     public ObservableCollection<PageViewModel> Pages { get; }
@@ -57,6 +78,37 @@ public partial class ShellViewModel : ObservableObject
         DateTime.Now.ToString("HH:mm", CultureInfo.CurrentUICulture));
 
     partial void OnCurrentPageChanged(PageViewModel value) => ActivatePage(value);
+
+    partial void OnSelectedPageChanged(PageViewModel? value)
+    {
+        if (value is not null)
+        {
+            Show(value);
+        }
+    }
+
+    /// <summary>
+    /// Moves to a page and remembers where it was moved from, so a page outside
+    /// the sidebar has somewhere to come back to.
+    /// </summary>
+    private void Show(PageViewModel page)
+    {
+        if (Pages.Contains(CurrentPage))
+        {
+            _returnTo = CurrentPage;
+        }
+
+        SelectedPage = Pages.Contains(page) ? page : null;
+        CurrentPage = page;
+    }
+
+    /// <summary>Opens the editor on a blank draft, from anywhere in the app.</summary>
+    [RelayCommand]
+    private void NewInvoice()
+    {
+        _invoiceEditor.Open(null);
+        Show(_invoiceEditor);
+    }
 
     /// <summary>
     /// Pages load their own data when the user navigates to them. This is the
@@ -85,6 +137,9 @@ public partial class ShellViewModel : ObservableObject
         {
             page.OnLanguageChanged();
         }
+
+        // The editor has no sidebar entry, and it may well be the page on screen.
+        _invoiceEditor.OnLanguageChanged();
 
         OnPropertyChanged(nameof(BackupStatus));
     }
