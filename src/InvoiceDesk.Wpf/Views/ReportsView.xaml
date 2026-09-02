@@ -1,0 +1,215 @@
+<UserControl x:Class="InvoiceDesk.Wpf.Views.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:loc="clr-namespace:InvoiceDesk.Wpf.Localization"
+             xmlns:vm="clr-namespace:InvoiceDesk.Wpf.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:ReportsViewModel}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style x:Key="FieldBox" TargetType="TextBox" BasedOn="{StaticResource SearchBox}">
+            <Setter Property="Width" Value="120" />
+        </Style>
+
+        <Style x:Key="ColumnHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+
+            <!-- Period and export -->
+            <Border Style="{StaticResource CardBorder}" Margin="0,0,0,12">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
+                                Command="{Binding ExportCsvCommand}"
+                                Content="{loc:Text Reports_ExportCsv}" />
+                        <Button Style="{StaticResource PrimaryButton}"
+                                Command="{Binding ExportPdfCommand}"
+                                Content="{loc:Text Reports_ExportPdf}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <CheckBox VerticalAlignment="Center" FontSize="13"
+                                  Foreground="{DynamicResource TextSecondaryBrush}"
+                                  IsChecked="{Binding IsCustomRange}"
+                                  Content="{loc:Text Reports_CustomRange}" />
+
+                        <ComboBox Width="100" Height="32" Margin="14,0,0,0" FontSize="13"
+                                  ItemsSource="{Binding Years}"
+                                  SelectedItem="{Binding SelectedYear, Mode=TwoWay}" />
+
+                        <TextBox Style="{StaticResource FieldBox}" Margin="14,0,0,0"
+                                 Tag="{Binding DateHint}"
+                                 Visibility="{Binding IsCustomRange, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 Text="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox Style="{StaticResource FieldBox}" Margin="8,0,0,0"
+                                 Tag="{Binding DateHint}"
+                                 Visibility="{Binding IsCustomRange, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 Text="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Margin="16,0,0,0" VerticalAlignment="Center" FontSize="12"
+                                   Foreground="{DynamicResource TextMutedBrush}"
+                                   Text="{Binding StatusMessage}" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- KPI row -->
+            <UniformGrid Rows="1" Columns="4" Margin="0,0,0,12">
+                <Border Style="{StaticResource MetricBorder}" Margin="0,0,6,0">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource CaptionText}" Text="{loc:Text Reports_Invoiced}" />
+                        <TextBlock Style="{StaticResource MetricValueText}" Text="{Binding InvoicedText}" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource MetricBorder}" Margin="6,0">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource CaptionText}" Text="{loc:Text Reports_Paid}" />
+                        <TextBlock Style="{StaticResource MetricValueText}" Text="{Binding PaidText}" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource MetricBorder}" Margin="6,0">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource CaptionText}" Text="{loc:Text Reports_Outstanding}" />
+                        <TextBlock Style="{StaticResource MetricValueText}" Text="{Binding OutstandingText}" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource MetricBorder}" Margin="6,0,0,0">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource CaptionText}" Text="{loc:Text Reports_Tax}" />
+                        <TextBlock Style="{StaticResource MetricValueText}" Text="{Binding TaxText}" />
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- Monthly breakdown -->
+            <Border Style="{StaticResource CardBorder}" Padding="0" Margin="0,0,0,12">
+                <StackPanel>
+                    <Border Background="{DynamicResource SurfaceMutedBrush}" CornerRadius="8,8,0,0" Padding="14,8">
+                        <TextBlock FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}"
+                                   Text="{loc:Text Reports_MonthlyBreakdown}" />
+                    </Border>
+
+                    <Border BorderBrush="{DynamicResource BorderSubtleBrush}" BorderThickness="0,1,0,1" Padding="14,7">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="130" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Style="{StaticResource ColumnHeader}" Text="{loc:Text Reports_ColumnMonth}" />
+                            <TextBlock Grid.Column="1" Style="{StaticResource ColumnHeader}" TextAlignment="Right" Text="{loc:Text Reports_Invoiced}" />
+                            <TextBlock Grid.Column="2" Style="{StaticResource ColumnHeader}" TextAlignment="Right" Text="{loc:Text Reports_Paid}" />
+                            <TextBlock Grid.Column="3" Style="{StaticResource ColumnHeader}" TextAlignment="Right" Text="{loc:Text Reports_Outstanding}" />
+                        </Grid>
+                    </Border>
+
+                    <ItemsControl ItemsSource="{Binding MonthlyRows}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="{DynamicResource BorderSubtleBrush}" BorderThickness="0,0,0,1" Padding="14,9">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="130" />
+                                            <ColumnDefinition Width="130" />
+                                            <ColumnDefinition Width="130" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" FontSize="13" Foreground="{DynamicResource TextPrimaryBrush}" Text="{Binding MonthLabel}" />
+                                        <TextBlock Grid.Column="1" FontSize="13" TextAlignment="Right" Foreground="{DynamicResource TextPrimaryBrush}" Text="{Binding InvoicedText}" />
+                                        <TextBlock Grid.Column="2" FontSize="13" TextAlignment="Right" Foreground="{DynamicResource TextSecondaryBrush}" Text="{Binding PaidText}" />
+                                        <TextBlock Grid.Column="3" FontSize="13" TextAlignment="Right" Foreground="{DynamicResource TextSecondaryBrush}" Text="{Binding OutstandingText}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock Margin="14,14" HorizontalAlignment="Center" FontSize="13"
+                               Foreground="{DynamicResource TextMutedBrush}"
+                               Text="{loc:Text Reports_Empty}"
+                               Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Client breakdown -->
+            <Border Style="{StaticResource CardBorder}" Padding="0" Margin="0,0,0,12">
+                <StackPanel>
+                    <Border Background="{DynamicResource SurfaceMutedBrush}" CornerRadius="8,8,0,0" Padding="14,8">
+                        <TextBlock FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}"
+                                   Text="{loc:Text Reports_ClientBreakdown}" />
+                    </Border>
+
+                    <Border BorderBrush="{DynamicResource BorderSubtleBrush}" BorderThickness="0,1,0,1" Padding="14,7">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="130" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Style="{StaticResource ColumnHeader}" Text="{loc:Text Reports_ColumnClient}" />
+                            <TextBlock Grid.Column="1" Style="{StaticResource ColumnHeader}" TextAlignment="Right" Text="{loc:Text Reports_Invoiced}" />
+                            <TextBlock Grid.Column="2" Style="{StaticResource ColumnHeader}" TextAlignment="Right" Text="{loc:Text Reports_Paid}" />
+                            <TextBlock Grid.Column="3" Style="{StaticResource ColumnHeader}" TextAlignment="Right" Text="{loc:Text Reports_Outstanding}" />
+                        </Grid>
+                    </Border>
+
+                    <ItemsControl ItemsSource="{Binding ClientRows}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="{DynamicResource BorderSubtleBrush}" BorderThickness="0,0,0,1" Padding="14,9">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="130" />
+                                            <ColumnDefinition Width="130" />
+                                            <ColumnDefinition Width="130" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" FontSize="13" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource TextPrimaryBrush}" Text="{Binding ClientName}" />
+                                        <TextBlock Grid.Column="1" FontSize="13" TextAlignment="Right" Foreground="{DynamicResource TextPrimaryBrush}" Text="{Binding InvoicedText}" />
+                                        <TextBlock Grid.Column="2" FontSize="13" TextAlignment="Right" Foreground="{DynamicResource TextSecondaryBrush}" Text="{Binding PaidText}" />
+                                        <TextBlock Grid.Column="3" FontSize="13" TextAlignment="Right" Foreground="{DynamicResource TextSecondaryBrush}" Text="{Binding OutstandingText}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!-- Status breakdown -->
+            <Border Style="{StaticResource CardBorder}">
+                <StackPanel>
+                    <TextBlock FontSize="12" Margin="0,0,0,10" Foreground="{DynamicResource TextSecondaryBrush}"
+                               Text="{loc:Text Reports_StatusBreakdown}" />
+                    <ItemsControl ItemsSource="{Binding StatusCounts}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Rows="1" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5,0" HorizontalAlignment="Center">
+                                    <TextBlock HorizontalAlignment="Center" Style="{StaticResource MetricValueText}" Text="{Binding Count}" />
+                                    <TextBlock HorizontalAlignment="Center" Style="{StaticResource CaptionText}" Text="{Binding StatusText}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

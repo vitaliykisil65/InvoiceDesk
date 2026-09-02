@@ -120,11 +120,56 @@
     <value>Overdue</value>
   </data>
 
-  <data name="Placeholder_Planned" xml:space="preserve">
-    <value>Planned for an upcoming milestone</value>
+  <data name="Reports_DateHint" xml:space="preserve">
+    <value>{0}</value>
   </data>
-  <data name="Placeholder_Reports" xml:space="preserve">
-    <value>Revenue, tax and client reports with export.</value>
+  <data name="Reports_CustomRange" xml:space="preserve">
+    <value>Custom range</value>
+  </data>
+  <data name="Reports_ExportCsv" xml:space="preserve">
+    <value>Export CSV</value>
+  </data>
+  <data name="Reports_ExportPdf" xml:space="preserve">
+    <value>Export PDF</value>
+  </data>
+  <data name="Reports_Exported" xml:space="preserve">
+    <value>Saved as {0}.</value>
+  </data>
+  <data name="Reports_Invoiced" xml:space="preserve">
+    <value>Invoiced</value>
+  </data>
+  <data name="Reports_Paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="Reports_Outstanding" xml:space="preserve">
+    <value>Outstanding</value>
+  </data>
+  <data name="Reports_Tax" xml:space="preserve">
+    <value>VAT</value>
+  </data>
+  <data name="Reports_MonthlyBreakdown" xml:space="preserve">
+    <value>Revenue by month</value>
+  </data>
+  <data name="Reports_ClientBreakdown" xml:space="preserve">
+    <value>Revenue by client</value>
+  </data>
+  <data name="Reports_StatusBreakdown" xml:space="preserve">
+    <value>Invoices by status</value>
+  </data>
+  <data name="Reports_ColumnMonth" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="Reports_ColumnClient" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="Reports_Empty" xml:space="preserve">
+    <value>No invoices in this period.</value>
+  </data>
+  <data name="ReportPdf_Title" xml:space="preserve">
+    <value>REVENUE REPORT</value>
+  </data>
+  <data name="ReportPdf_Period" xml:space="preserve">
+    <value>Period: {0} – {1}</value>
   </data>
 
   <data name="Settings_Appearance" xml:space="preserve">

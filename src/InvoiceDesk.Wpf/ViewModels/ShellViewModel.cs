@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -41,6 +41,7 @@ public partial class ShellViewModel : ObservableObject
         ProductsViewModel products,
         PaymentsViewModel payments,
         CompanyViewModel company,
+        ReportsViewModel reports,
         InvoiceEditorViewModel invoiceEditor,
         SettingsViewModel settings,
         ThemeService themeService,
@@ -60,7 +61,7 @@ public partial class ShellViewModel : ObservableObject
             products,
             payments,
             company,
-            new PlaceholderViewModel("Nav_Reports", "", "Placeholder_Reports"),
+            reports,
             settings
         ];
 

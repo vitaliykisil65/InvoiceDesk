@@ -404,11 +404,56 @@
   <data name="Invoices_DeletedStatus" xml:space="preserve">
     <value>Чернетку {0} видалено.</value>
   </data>
-  <data name="Placeholder_Planned" xml:space="preserve">
-    <value>Заплановано на один з наступних етапів</value>
+  <data name="Reports_DateHint" xml:space="preserve">
+    <value>{0}</value>
   </data>
-  <data name="Placeholder_Reports" xml:space="preserve">
-    <value>Звіти про дохід, податки та клієнтів з експортом.</value>
+  <data name="Reports_CustomRange" xml:space="preserve">
+    <value>Довільний період</value>
+  </data>
+  <data name="Reports_ExportCsv" xml:space="preserve">
+    <value>Експорт CSV</value>
+  </data>
+  <data name="Reports_ExportPdf" xml:space="preserve">
+    <value>Експорт PDF</value>
+  </data>
+  <data name="Reports_Exported" xml:space="preserve">
+    <value>Збережено як {0}.</value>
+  </data>
+  <data name="Reports_Invoiced" xml:space="preserve">
+    <value>Виставлено</value>
+  </data>
+  <data name="Reports_Paid" xml:space="preserve">
+    <value>Сплачено</value>
+  </data>
+  <data name="Reports_Outstanding" xml:space="preserve">
+    <value>Заборговано</value>
+  </data>
+  <data name="Reports_Tax" xml:space="preserve">
+    <value>ПДВ</value>
+  </data>
+  <data name="Reports_MonthlyBreakdown" xml:space="preserve">
+    <value>Дохід за місяцями</value>
+  </data>
+  <data name="Reports_ClientBreakdown" xml:space="preserve">
+    <value>Дохід за клієнтами</value>
+  </data>
+  <data name="Reports_StatusBreakdown" xml:space="preserve">
+    <value>Рахунки за статусами</value>
+  </data>
+  <data name="Reports_ColumnMonth" xml:space="preserve">
+    <value>Місяць</value>
+  </data>
+  <data name="Reports_ColumnClient" xml:space="preserve">
+    <value>Клієнт</value>
+  </data>
+  <data name="Reports_Empty" xml:space="preserve">
+    <value>За цей період немає рахунків.</value>
+  </data>
+  <data name="ReportPdf_Title" xml:space="preserve">
+    <value>ЗВІТ ПРО ДОХІД</value>
+  </data>
+  <data name="ReportPdf_Period" xml:space="preserve">
+    <value>Період: {0} – {1}</value>
   </data>
   <data name="Invoices_New" xml:space="preserve">
     <value>Новий рахунок</value>

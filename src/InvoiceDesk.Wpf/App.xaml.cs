@@ -32,6 +32,7 @@ public partial class App : Application
                 services.AddSingleton<ConfirmationService>();
                 services.AddSingleton<StorageService>();
                 services.AddSingleton<InvoicePdfService>();
+                services.AddSingleton<ReportExportService>();
                 services.AddSingleton<ThemeService>();
                 services.AddSingleton<LocalizationService>();
                 services.AddSingleton<NavigationService>();
@@ -44,6 +45,7 @@ public partial class App : Application
                 services.AddSingleton<ProductsViewModel>();
                 services.AddSingleton<InvoiceEditorViewModel>();
                 services.AddSingleton<CompanyViewModel>();
+                services.AddSingleton<ReportsViewModel>();
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<ShellViewModel>();
                 services.AddSingleton<ShellWindow>();
