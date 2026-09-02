@@ -26,6 +26,7 @@ public partial class App : Application
 
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<ClientsViewModel>();
+                services.AddSingleton<ProductsViewModel>();
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<ShellViewModel>();
                 services.AddSingleton<ShellWindow>();

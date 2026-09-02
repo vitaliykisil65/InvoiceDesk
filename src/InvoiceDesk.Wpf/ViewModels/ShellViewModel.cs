@@ -20,6 +20,7 @@ public partial class ShellViewModel : ObservableObject
     public ShellViewModel(
         DashboardViewModel dashboard,
         ClientsViewModel clients,
+        ProductsViewModel products,
         SettingsViewModel settings,
         ThemeService themeService,
         LocalizationService localizationService)
@@ -31,7 +32,7 @@ public partial class ShellViewModel : ObservableObject
             dashboard,
             new PlaceholderViewModel("Nav_Invoices", "", "Placeholder_Invoices"),
             clients,
-            new PlaceholderViewModel("Nav_Services", "", "Placeholder_Services"),
+            products,
             new PlaceholderViewModel("Nav_Payments", "", "Placeholder_Payments"),
             new PlaceholderViewModel("Nav_Reports", "", "Placeholder_Reports"),
             settings

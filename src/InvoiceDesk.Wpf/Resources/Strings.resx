@@ -120,9 +120,6 @@
   <data name="Placeholder_Invoices" xml:space="preserve">
     <value>Invoice list with filters, bulk actions and PDF export.</value>
   </data>
-  <data name="Placeholder_Services" xml:space="preserve">
-    <value>Price list of products and services.</value>
-  </data>
   <data name="Placeholder_Payments" xml:space="preserve">
     <value>Payments received against open invoices.</value>
   </data>
@@ -293,6 +290,78 @@
     <value>Client restored.</value>
   </data>
   <data name="Clients_ArchivedTag" xml:space="preserve">
+    <value>Archived</value>
+  </data>
+  <data name="Products_New" xml:space="preserve">
+    <value>New service</value>
+  </data>
+  <data name="Products_SearchPlaceholder" xml:space="preserve">
+    <value>Search the price list</value>
+  </data>
+  <data name="Products_ShowArchived" xml:space="preserve">
+    <value>Show archived</value>
+  </data>
+  <data name="Products_Count" xml:space="preserve">
+    <value>{0} entries</value>
+  </data>
+  <data name="Products_Subtitle" xml:space="preserve">
+    <value>per {0} · VAT {1}%</value>
+  </data>
+  <data name="Products_NewTitle" xml:space="preserve">
+    <value>New service</value>
+  </data>
+  <data name="Products_EditTitle" xml:space="preserve">
+    <value>Price list entry</value>
+  </data>
+  <data name="Products_Archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="Products_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Products_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Products_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Products_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Products_Unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Products_UnitPrice" xml:space="preserve">
+    <value>Price per unit</value>
+  </data>
+  <data name="Products_TaxRate" xml:space="preserve">
+    <value>VAT rate, %</value>
+  </data>
+  <data name="Products_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Products_NameRequired" xml:space="preserve">
+    <value>A service needs a name.</value>
+  </data>
+  <data name="Products_UnitRequired" xml:space="preserve">
+    <value>Name the unit it is billed by, such as h, pcs or mo.</value>
+  </data>
+  <data name="Products_PriceInvalid" xml:space="preserve">
+    <value>The price has to be a number, and not a negative one.</value>
+  </data>
+  <data name="Products_TaxRateInvalid" xml:space="preserve">
+    <value>The VAT rate has to be a number between 0 and 100.</value>
+  </data>
+  <data name="Products_Saved" xml:space="preserve">
+    <value>Saved {0}.</value>
+  </data>
+  <data name="Products_ArchivedStatus" xml:space="preserve">
+    <value>Service archived. It stays on the invoices it was billed on.</value>
+  </data>
+  <data name="Products_RestoredStatus" xml:space="preserve">
+    <value>Service restored.</value>
+  </data>
+  <data name="Products_ArchivedTag" xml:space="preserve">
     <value>Archived</value>
   </data>
 </root>

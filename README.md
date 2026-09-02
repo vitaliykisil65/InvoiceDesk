@@ -27,6 +27,8 @@ not to ship a commercial product.
 - **Clients** — searchable list next to an editor: add a client, correct one, or
   archive it. Clients are archived rather than deleted, so an invoice never
   loses the company it was issued to.
+- **Price list** — the services and products invoices are billed from, each with
+  its unit, price and VAT rate, entered in the language the interface is in.
 - **Dashboard** — revenue for the current month, outstanding and overdue totals,
   an eight month revenue chart and the latest invoices, all computed from the
   data rather than hard-coded.
@@ -57,10 +59,10 @@ not to ship a commercial product.
 
 Working today: shell and navigation, theming, localization, settings, a SQLite
 database created and migrated on first launch, a dashboard driven by it, and a
-clients screen where records are created, edited and archived. The money,
-status and invoice numbering rules are covered by unit tests.
+clients and price list screens where records are created, edited and archived.
+The money, status and invoice numbering rules are covered by unit tests.
 
-Next: the price list, the invoice list and editor, PDF export, backups, and a
+Next: the invoice list and editor, payments, reports, PDF export, backups, and a
 Windows installer.
 
 ## Build and run
