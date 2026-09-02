@@ -340,7 +340,9 @@
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Collapsed" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
+                                            <DataTrigger
+                                                Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Value="">
                                                 <Setter Property="Visibility" Value="Visible" />
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -353,6 +355,26 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+        <!-- A field bound with ValidatesOnDataErrors shows its own reason for
+             being invalid: a red border and a tooltip, instead of a shared
+             message somewhere else on the form. The default red squiggly
+             adorner is suppressed since the border already carries the signal. -->
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <AdornedElementPlaceholder />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource DangerTextBrush}" />
+                <Setter Property="BorderThickness" Value="1.5" />
+                <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

@@ -1,0 +1,145 @@
+<UserControl x:Class="InvoiceDesk.Wpf.Views.CompanyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:loc="clr-namespace:InvoiceDesk.Wpf.Localization"
+             xmlns:vm="clr-namespace:InvoiceDesk.Wpf.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:CompanyViewModel}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        </Style>
+
+        <Style x:Key="FieldBox" TargetType="TextBox" BasedOn="{StaticResource SearchBox}">
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+
+        <Style x:Key="NotesBox" TargetType="TextBox" BasedOn="{StaticResource FieldBox}">
+            <Setter Property="Height" Value="72" />
+            <Setter Property="Padding" Value="10,6" />
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <Border Style="{StaticResource CardBorder}">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Margin="0,0,0,4" Style="{StaticResource PageTitleText}"
+                       FontSize="16" Text="{loc:Text Company_Title}" />
+            <TextBlock DockPanel.Dock="Top" Margin="0,0,0,16" FontSize="12" TextWrapping="Wrap"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Text="{loc:Text Company_Hint}" />
+
+            <Border DockPanel.Dock="Bottom" BorderBrush="{DynamicResource BorderSubtleBrush}"
+                    BorderThickness="0,1,0,0" Padding="0,12,0,0" Margin="0,4,0,0">
+                <Grid>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock FontSize="12" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource DangerTextBrush}"
+                                   Text="{Binding ValidationMessage}" />
+                        <TextBlock FontSize="12" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TextMutedBrush}"
+                                   Text="{Binding StatusMessage}" />
+                    </StackPanel>
+
+                    <Button HorizontalAlignment="Right" Style="{StaticResource PrimaryButton}"
+                            Command="{Binding SaveCommand}"
+                            Content="{loc:Text Company_Save}" />
+                </Grid>
+            </Border>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Margin="0,0,4,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_Name}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_TaxNumber}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding TaxNumber, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_Email}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_Phone}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_Address}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_Bank}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding Bank, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_Iban}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding Iban, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_DefaultCurrency}" />
+                        <TextBox Style="{StaticResource FieldBox}" Tag="EUR, USD, GBP, UAH, PLN..."
+                                 Text="{Binding DefaultCurrency, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_PaymentTermDays}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding PaymentTermDays, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_InvoiceNumberPrefix}" />
+                        <TextBox Style="{StaticResource FieldBox}"
+                                 Text="{Binding InvoiceNumberPrefix, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{loc:Text Company_InvoiceFooter}" />
+                        <TextBox Style="{StaticResource NotesBox}"
+                                 Text="{Binding InvoiceFooter, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </DockPanel>
+    </Border>
+</UserControl>

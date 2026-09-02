@@ -6,6 +6,7 @@ using InvoiceDesk.Domain.Abstractions;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
 using InvoiceDesk.Wpf.Services;
+using Serilog;
 
 namespace InvoiceDesk.Wpf.ViewModels;
 
@@ -163,6 +164,7 @@ public partial class PaymentsViewModel : PageViewModel
         {
             // The storage layer's exception types belong to EF Core, which this
             // project deliberately cannot see, so the message is what we show.
+            Log.Error(exception, "Failed to save payment for invoice {InvoiceId}", payment.InvoiceId);
             StatusMessage = exception.Message;
         }
         finally
@@ -183,11 +185,13 @@ public partial class PaymentsViewModel : PageViewModel
             return;
         }
 
+        var paymentId = SelectedPayment.Id;
+
         try
         {
             IsBusy = true;
 
-            await _payments.DeleteAsync(SelectedPayment.Id);
+            await _payments.DeleteAsync(paymentId);
             StatusMessage = LocalizedStrings.Get("Payments_DeletedStatus");
 
             SelectedPayment = null;
@@ -197,6 +201,7 @@ public partial class PaymentsViewModel : PageViewModel
         }
         catch (Exception exception)
         {
+            Log.Error(exception, "Failed to delete payment {PaymentId}", paymentId);
             StatusMessage = exception.Message;
         }
         finally

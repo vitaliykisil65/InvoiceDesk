@@ -29,10 +29,14 @@ public class SettingsService
 
     public string SettingsPath => _settingsPath;
 
+    /// <summary>Raised after a save, so anything showing settings-derived text can refresh.</summary>
+    public event EventHandler? SettingsChanged;
+
     public void Save(AppSettings settings)
     {
         Current = settings;
         File.WriteAllText(_settingsPath, JsonSerializer.Serialize(settings, SerializerOptions));
+        SettingsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private AppSettings Load()

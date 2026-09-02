@@ -51,6 +51,9 @@ public partial class InvoiceLineViewModel : ObservableObject
     /// <summary>The price list entry this line came from, if it came from one.</summary>
     public int? ProductId { get; }
 
+    /// <summary>The invoice's currency; set by the editor since a line does not carry its own.</summary>
+    public string Currency { get; set; } = "EUR";
+
     /// <summary>True when the row has a description and numbers that can be billed.</summary>
     public bool IsValid =>
         !string.IsNullOrWhiteSpace(Description)
@@ -58,7 +61,7 @@ public partial class InvoiceLineViewModel : ObservableObject
         && CultureText.ParseNumber(UnitPrice) is >= 0m
         && CultureText.ParseNumber(TaxRate) is >= 0m and <= 100m;
 
-    public string NetText => CultureText.FormatMoney(ToLine().NetAmount);
+    public string NetText => CultureText.FormatMoney(ToLine().NetAmount, Currency);
 
     /// <summary>The domain line this row stands for; unreadable numbers count as zero.</summary>
     public InvoiceLine ToLine() => new()

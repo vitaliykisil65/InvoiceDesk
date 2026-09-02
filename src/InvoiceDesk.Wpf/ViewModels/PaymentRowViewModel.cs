@@ -12,7 +12,7 @@ public class PaymentRowViewModel
         InvoiceNumber = payment.Invoice?.Number ?? string.Empty;
         ClientName = payment.Invoice?.Client?.Name ?? string.Empty;
         PaidOnText = CultureText.FormatDate(payment.PaidOn);
-        AmountText = CultureText.FormatMoney(payment.Amount);
+        AmountText = CultureText.FormatMoney(payment.Amount, payment.Invoice?.Currency ?? "EUR");
         Method = payment.Method ?? string.Empty;
         Reference = payment.Reference ?? string.Empty;
     }
@@ -42,7 +42,7 @@ public class InvoicePickerOption
             "Payments_InvoiceOption",
             invoice.Number,
             invoice.Client?.Name ?? string.Empty,
-            CultureText.FormatMoney(invoice.OutstandingAmount));
+            CultureText.FormatMoney(invoice.OutstandingAmount, invoice.Currency));
     }
 
     public int Id { get; }

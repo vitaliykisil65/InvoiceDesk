@@ -31,6 +31,9 @@
   <data name="Nav_Reports" xml:space="preserve">
     <value>Reports</value>
   </data>
+  <data name="Nav_Company" xml:space="preserve">
+    <value>My Company</value>
+  </data>
   <data name="Nav_Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -46,6 +49,9 @@
   </data>
   <data name="Shell_LocalDatabase" xml:space="preserve">
     <value>Local database</value>
+  </data>
+  <data name="Shell_CompanyPlaceholder" xml:space="preserve">
+    <value>Set up your company</value>
   </data>
   <data name="Shell_BackupStatus" xml:space="preserve">
     <value>Backup: today {0}</value>
@@ -171,12 +177,6 @@
   </data>
   <data name="Settings_ReportsHint" xml:space="preserve">
     <value>PDF, Excel, CSV</value>
-  </data>
-  <data name="Settings_Attachments" xml:space="preserve">
-    <value>Attachments</value>
-  </data>
-  <data name="Settings_AttachmentsHint" xml:space="preserve">
-    <value>Files linked to invoices</value>
   </data>
   <data name="Settings_Backups" xml:space="preserve">
     <value>Backups</value>
@@ -372,6 +372,9 @@
   </data>
   <data name="Invoices_MarkAsSent" xml:space="preserve">
     <value>Mark as sent</value>
+  </data>
+  <data name="Invoices_RecordPayment" xml:space="preserve">
+    <value>Record payment</value>
   </data>
   <data name="Invoices_RecordPayment" xml:space="preserve">
     <value>Record payment</value>
@@ -604,5 +607,66 @@
   </data>
   <data name="Payments_AmountInvalid" xml:space="preserve">
     <value>Enter an amount above zero.</value>
+  </data>
+
+  <data name="Company_Title" xml:space="preserve">
+    <value>My Company</value>
+  </data>
+  <data name="Company_Hint" xml:space="preserve">
+    <value>Printed on every invoice, and used as the defaults a new invoice starts from.</value>
+  </data>
+  <data name="Company_Name" xml:space="preserve">
+    <value>Company name</value>
+  </data>
+  <data name="Company_NameRequired" xml:space="preserve">
+    <value>Enter a company name.</value>
+  </data>
+  <data name="Company_TaxNumber" xml:space="preserve">
+    <value>Tax number</value>
+  </data>
+  <data name="Company_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Company_EmailInvalid" xml:space="preserve">
+    <value>Enter a valid email address.</value>
+  </data>
+  <data name="Company_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Company_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Company_Bank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="Company_Iban" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="Company_DefaultCurrency" xml:space="preserve">
+    <value>Default currency</value>
+  </data>
+  <data name="Company_CurrencyInvalid" xml:space="preserve">
+    <value>Enter a 3-letter currency code, e.g. EUR.</value>
+  </data>
+  <data name="Company_PaymentTermDays" xml:space="preserve">
+    <value>Payment term (days)</value>
+  </data>
+  <data name="Company_PaymentTermInvalid" xml:space="preserve">
+    <value>Enter a number of days above zero.</value>
+  </data>
+  <data name="Company_InvoiceNumberPrefix" xml:space="preserve">
+    <value>Invoice number prefix</value>
+  </data>
+  <data name="Company_PrefixRequired" xml:space="preserve">
+    <value>Enter a prefix, e.g. INV.</value>
+  </data>
+  <data name="Company_InvoiceFooter" xml:space="preserve">
+    <value>Invoice footer</value>
+  </data>
+  <data name="Company_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Company_Saved" xml:space="preserve">
+    <value>Company details saved.</value>
   </data>
 </root>

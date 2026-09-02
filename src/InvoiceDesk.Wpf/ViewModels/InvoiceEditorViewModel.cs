@@ -8,6 +8,7 @@ using InvoiceDesk.Domain.Abstractions;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
 using InvoiceDesk.Wpf.Services;
+using Serilog;
 
 namespace InvoiceDesk.Wpf.ViewModels;
 
@@ -27,14 +28,13 @@ public partial class InvoiceEditorViewModel : PageViewModel
         nameof(DiscountPercent), nameof(Notes)
     ];
 
-    /// <summary>How long a fresh invoice gets to be paid, unless the user says otherwise.</summary>
-    private const int DefaultPaymentDays = 14;
-
     private readonly IInvoiceStore _invoices;
 
     private readonly IClientStore _clients;
 
     private readonly IProductStore _products;
+
+    private readonly SettingsService _settings;
 
     private readonly NavigationService _navigation;
 
@@ -82,11 +82,13 @@ public partial class InvoiceEditorViewModel : PageViewModel
         IInvoiceStore invoices,
         IClientStore clients,
         IProductStore products,
+        SettingsService settings,
         NavigationService navigation)
     {
         _invoices = invoices;
         _clients = clients;
         _products = products;
+        _settings = settings;
         _navigation = navigation;
 
         Lines.CollectionChanged += OnLinesChanged;
@@ -115,17 +117,18 @@ public partial class InvoiceEditorViewModel : PageViewModel
 
     public string DateHint => LocalizedStrings.Format("InvoiceEditor_DateHint", CultureText.DatePattern);
 
-    public string NetText => CultureText.FormatMoney(Totals().NetTotal);
+    public string NetText => CultureText.FormatMoney(Totals().NetTotal, _editing.Currency);
 
-    public string DiscountText => CultureText.FormatMoney(-Totals().DiscountAmount);
+    public string DiscountText => CultureText.FormatMoney(-Totals().DiscountAmount, _editing.Currency);
 
-    public string TaxText => CultureText.FormatMoney(Totals().TaxTotal);
+    public string TaxText => CultureText.FormatMoney(Totals().TaxTotal, _editing.Currency);
 
-    public string GrandTotalText => CultureText.FormatMoney(Totals().GrandTotal);
+    public string GrandTotalText => CultureText.FormatMoney(Totals().GrandTotal, _editing.Currency);
 
-    public string PaidText => CultureText.FormatMoney(_editing.PaidAmount);
+    public string PaidText => CultureText.FormatMoney(_editing.PaidAmount, _editing.Currency);
 
-    public string OutstandingText => CultureText.FormatMoney(Totals().GrandTotal - _editing.PaidAmount);
+    public string OutstandingText =>
+        CultureText.FormatMoney(Totals().GrandTotal - _editing.PaidAmount, _editing.Currency);
 
     /// <summary>
     /// Points the editor at an invoice, or at a blank one when the id is null.
@@ -189,7 +192,7 @@ public partial class InvoiceEditorViewModel : PageViewModel
     [RelayCommand]
     private void AddLine()
     {
-        Lines.Add(new InvoiceLineViewModel());
+        Lines.Add(new InvoiceLineViewModel { Currency = _editing.Currency });
         StatusMessage = string.Empty;
     }
 
@@ -202,7 +205,7 @@ public partial class InvoiceEditorViewModel : PageViewModel
             return;
         }
 
-        Lines.Add(new InvoiceLineViewModel(SelectedProduct));
+        Lines.Add(new InvoiceLineViewModel(SelectedProduct) { Currency = _editing.Currency });
 
         SelectedProduct = null;
         StatusMessage = string.Empty;
@@ -240,6 +243,7 @@ public partial class InvoiceEditorViewModel : PageViewModel
         {
             // The storage layer's exception types belong to EF Core, which this
             // project deliberately cannot see, so the message is what we show.
+            Log.Error(exception, "Failed to save invoice {Number}", invoice.Number);
             StatusMessage = exception.Message;
         }
         finally
@@ -278,16 +282,22 @@ public partial class InvoiceEditorViewModel : PageViewModel
         }
     }
 
-    /// <summary>A draft with the next free number, dated today and due in two weeks.</summary>
+    /// <summary>A draft with the next free number, dated today and due per the company's payment term.</summary>
     private async Task<Invoice> NewInvoiceAsync(CancellationToken cancellationToken)
     {
         var today = DateTime.Today;
+        var company = _settings.Current.Company;
+
+        var prefix = string.IsNullOrWhiteSpace(company.InvoiceNumberPrefix)
+            ? InvoiceNumbers.DefaultPrefix
+            : company.InvoiceNumberPrefix;
 
         return new Invoice
         {
-            Number = await _invoices.GetNextNumberAsync(InvoiceNumbers.DefaultPrefix, today.Year, cancellationToken),
+            Number = await _invoices.GetNextNumberAsync(prefix, today.Year, cancellationToken),
             IssuedOn = today,
-            DueOn = today.AddDays(DefaultPaymentDays),
+            DueOn = today.AddDays(company.PaymentTermDays),
+            Currency = company.DefaultCurrency,
             Status = InvoiceStatus.Draft
         };
     }
@@ -317,7 +327,7 @@ public partial class InvoiceEditorViewModel : PageViewModel
 
         foreach (var line in invoice.Lines)
         {
-            Lines.Add(new InvoiceLineViewModel(line));
+            Lines.Add(new InvoiceLineViewModel(line) { Currency = invoice.Currency });
         }
 
         _isFillingForm = false;

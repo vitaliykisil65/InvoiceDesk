@@ -21,8 +21,10 @@ public class InvoiceRowViewModel
         DueText = IsDraft
             ? "—"
             : invoice.DueOn.ToString("dd MMM", CultureInfo.CurrentUICulture);
-        TotalText = CultureText.FormatMoney(invoice.GrandTotal);
-        OutstandingText = invoice.OutstandingAmount > 0m ? CultureText.FormatMoney(invoice.OutstandingAmount) : "—";
+        TotalText = CultureText.FormatMoney(invoice.GrandTotal, invoice.Currency);
+        OutstandingText = invoice.OutstandingAmount > 0m
+            ? CultureText.FormatMoney(invoice.OutstandingAmount, invoice.Currency)
+            : "—";
     }
 
     public int Id { get; }

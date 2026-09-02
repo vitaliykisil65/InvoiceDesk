@@ -16,4 +16,6 @@ public static class AppPaths
     public static string SettingsFile => Path.Combine(AppDataFolder, "settings.json");
 
     public static string DatabaseFile => Path.Combine(AppDataFolder, "invoicedesk.db");
+
+    public static string LogsFolder => Path.Combine(AppDataFolder, "Logs");
 }

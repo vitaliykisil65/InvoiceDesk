@@ -4,12 +4,15 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceDesk.Wpf.Localization;
 using InvoiceDesk.Wpf.Services;
+using Serilog;
 
 namespace InvoiceDesk.Wpf.ViewModels;
 
 public partial class ShellViewModel : ObservableObject
 {
     private readonly ThemeService _themeService;
+
+    private readonly SettingsService _settingsService;
 
     private readonly InvoiceEditorViewModel _invoiceEditor;
 
@@ -37,13 +40,16 @@ public partial class ShellViewModel : ObservableObject
         ClientsViewModel clients,
         ProductsViewModel products,
         PaymentsViewModel payments,
+        CompanyViewModel company,
         InvoiceEditorViewModel invoiceEditor,
         SettingsViewModel settings,
         ThemeService themeService,
+        SettingsService settingsService,
         LocalizationService localizationService,
         NavigationService navigationService)
     {
         _themeService = themeService;
+        _settingsService = settingsService;
         _invoiceEditor = invoiceEditor;
 
         Pages =
@@ -53,6 +59,7 @@ public partial class ShellViewModel : ObservableObject
             clients,
             products,
             payments,
+            company,
             new PlaceholderViewModel("Nav_Reports", "", "Placeholder_Reports"),
             settings
         ];
@@ -62,6 +69,7 @@ public partial class ShellViewModel : ObservableObject
 
         localizationService.LanguageChanged += (_, _) => OnLanguageChanged();
         themeService.ThemeChanged += (_, _) => OnPropertyChanged(nameof(ThemeGlyph));
+        settingsService.SettingsChanged += (_, _) => OnPropertyChanged(nameof(CompanyName));
 
         navigationService.PageRequested += (_, page) => Show(page);
         navigationService.BackRequested += (_, _) => Show(_returnTo ?? Pages[0]);
@@ -69,7 +77,14 @@ public partial class ShellViewModel : ObservableObject
 
     public ObservableCollection<PageViewModel> Pages { get; }
 
-    public string CompanyName => "Acme Studio";
+    public string CompanyName
+    {
+        get
+        {
+            var name = _settingsService.Current.Company.Name;
+            return string.IsNullOrWhiteSpace(name) ? LocalizedStrings.Get("Shell_CompanyPlaceholder") : name;
+        }
+    }
 
     /// <summary>Glyph for the theme switch: shows the theme the user would move to.</summary>
     public string ThemeGlyph => _themeService.Effective == AppTheme.Light ? "" : "";
@@ -125,6 +140,7 @@ public partial class ShellViewModel : ObservableObject
         }
         catch (Exception exception)
         {
+            Log.Error(exception, "Failed to load page {Page}", page.GetType().Name);
             page.LoadError = exception.Message;
         }
     }
@@ -143,5 +159,6 @@ public partial class ShellViewModel : ObservableObject
         _invoiceEditor.OnLanguageChanged();
 
         OnPropertyChanged(nameof(BackupStatus));
+        OnPropertyChanged(nameof(CompanyName));
     }
 }

@@ -190,30 +190,6 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <TextBlock Style="{StaticResource RowLabel}" Text="{loc:Text Settings_Attachments}" />
-                            <TextBlock Style="{StaticResource CaptionText}"
-                                       Text="{loc:Text Settings_AttachmentsHint}" />
-                        </StackPanel>
-                        <TextBox Grid.Column="1" Style="{StaticResource PathBox}" Margin="0,0,8,0"
-                                 Text="{Binding AttachmentsFolder}" />
-                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <Button Style="{StaticResource IconButton}" Content="&#xE838;" Margin="0,0,6,0"
-                                    ToolTip="{loc:Text Settings_Browse}"
-                                    Command="{Binding BrowseFolderCommand}" CommandParameter="AttachmentsFolder" />
-                            <Button Style="{StaticResource IconButton}" Content="&#xE8A7;"
-                                    ToolTip="{loc:Text Settings_OpenFolder}"
-                                    Command="{Binding OpenFolderCommand}" CommandParameter="AttachmentsFolder" />
-                        </StackPanel>
-                    </Grid>
-
-                    <Border Style="{StaticResource Divider}" />
-                    <Grid Style="{StaticResource SettingsRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="190" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
                             <TextBlock Style="{StaticResource RowLabel}" Text="{loc:Text Settings_Backups}" />
                             <TextBlock Style="{StaticResource CaptionText}" Text="{loc:Text Settings_BackupsHint}" />
                         </StackPanel>

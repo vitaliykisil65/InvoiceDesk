@@ -21,9 +21,6 @@ public partial class SettingsViewModel : PageViewModel
     private string _reportsFolder = string.Empty;
 
     [ObservableProperty]
-    private string _attachmentsFolder = string.Empty;
-
-    [ObservableProperty]
     private string _backupsFolder = string.Empty;
 
     [ObservableProperty]
@@ -129,9 +126,6 @@ public partial class SettingsViewModel : PageViewModel
             case nameof(ReportsFolder):
                 ReportsFolder = dialog.FolderName;
                 break;
-            case nameof(AttachmentsFolder):
-                AttachmentsFolder = dialog.FolderName;
-                break;
             case nameof(BackupsFolder):
                 BackupsFolder = dialog.FolderName;
                 break;
@@ -145,7 +139,6 @@ public partial class SettingsViewModel : PageViewModel
     private void Save()
     {
         _draft.ReportsFolder = ReportsFolder;
-        _draft.AttachmentsFolder = AttachmentsFolder;
         _draft.BackupsFolder = BackupsFolder;
         _draft.AskWhereToSave = AskWhereToSave;
         _draft.OpenFolderAfterExport = OpenFolderAfterExport;
@@ -164,7 +157,6 @@ public partial class SettingsViewModel : PageViewModel
     private void ResetDefaults()
     {
         ReportsFolder = StorageService.DefaultReportsFolder;
-        AttachmentsFolder = StorageService.DefaultAttachmentsFolder;
         BackupsFolder = StorageService.DefaultBackupsFolder;
         AskWhereToSave = true;
         OpenFolderAfterExport = false;
@@ -181,7 +173,6 @@ public partial class SettingsViewModel : PageViewModel
 
     private string CurrentFolderFor(string target) => target switch
     {
-        nameof(AttachmentsFolder) => AttachmentsFolder,
         nameof(BackupsFolder) => BackupsFolder,
         _ => ReportsFolder
     };
@@ -189,7 +180,6 @@ public partial class SettingsViewModel : PageViewModel
     private void LoadFromDraft()
     {
         ReportsFolder = _draft.ReportsFolder;
-        AttachmentsFolder = _draft.AttachmentsFolder;
         BackupsFolder = _draft.BackupsFolder;
         AskWhereToSave = _draft.AskWhereToSave;
         OpenFolderAfterExport = _draft.OpenFolderAfterExport;

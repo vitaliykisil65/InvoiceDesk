@@ -35,6 +35,9 @@
             <DataTemplate DataType="{x:Type vm:InvoiceEditorViewModel}">
                 <views:InvoiceEditorView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:CompanyViewModel}">
+                <views:CompanyView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
                 <views:SettingsView />
             </DataTemplate>

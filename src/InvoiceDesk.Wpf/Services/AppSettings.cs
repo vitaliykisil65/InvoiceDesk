@@ -10,22 +10,22 @@ public class AppSettings
 
     public string ReportsFolder { get; set; } = string.Empty;
 
-    public string AttachmentsFolder { get; set; } = string.Empty;
-
     public string BackupsFolder { get; set; } = string.Empty;
 
     public bool AskWhereToSave { get; set; } = true;
 
     public bool OpenFolderAfterExport { get; set; }
 
+    public CompanyProfile Company { get; set; } = new();
+
     public AppSettings Clone() => new()
     {
         Theme = Theme,
         Language = Language,
         ReportsFolder = ReportsFolder,
-        AttachmentsFolder = AttachmentsFolder,
         BackupsFolder = BackupsFolder,
         AskWhereToSave = AskWhereToSave,
-        OpenFolderAfterExport = OpenFolderAfterExport
+        OpenFolderAfterExport = OpenFolderAfterExport,
+        Company = Company.Clone()
     };
 }

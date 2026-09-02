@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using InvoiceDesk.Domain.Abstractions;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
+using Serilog;
 
 namespace InvoiceDesk.Wpf.ViewModels;
 
@@ -195,6 +196,7 @@ public partial class ProductsViewModel : PageViewModel
         {
             // The storage layer's exception types belong to EF Core, which this
             // project deliberately cannot see, so the message is what we show.
+            Log.Error(exception, "Failed to save product {Name}", product.Name);
             StatusMessage = exception.Message;
         }
         finally

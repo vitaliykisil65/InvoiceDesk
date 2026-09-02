@@ -29,6 +29,19 @@ public static class CultureText
     public static string DatePattern =>
         CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern.ToLower(CultureInfo.CurrentUICulture);
 
-    public static string FormatMoney(decimal amount) =>
-        string.Create(CultureInfo.CurrentUICulture, $"€{amount:N2}");
+    private static readonly Dictionary<string, string> CurrencySymbols = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["EUR"] = "€",
+        ["USD"] = "$",
+        ["GBP"] = "£",
+        ["UAH"] = "₴",
+        ["PLN"] = "zł"
+    };
+
+    public static string FormatMoney(decimal amount, string currencyCode) =>
+        string.Create(CultureInfo.CurrentUICulture, $"{CurrencySymbol(currencyCode)}{amount:N2}");
+
+    /// <summary>The symbol for a currency code, or the code itself when it is not one of the common ones.</summary>
+    public static string CurrencySymbol(string currencyCode) =>
+        CurrencySymbols.TryGetValue(currencyCode, out var symbol) ? symbol : currencyCode + " ";
 }

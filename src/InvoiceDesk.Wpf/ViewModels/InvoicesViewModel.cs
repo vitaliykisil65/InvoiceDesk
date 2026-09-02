@@ -6,6 +6,7 @@ using InvoiceDesk.Domain.Abstractions;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
 using InvoiceDesk.Wpf.Services;
+using Serilog;
 
 namespace InvoiceDesk.Wpf.ViewModels;
 
@@ -24,6 +25,8 @@ public partial class InvoicesViewModel : PageViewModel
     private readonly InvoiceEditorViewModel _editor;
 
     private readonly PaymentsViewModel _payments;
+
+    private readonly SettingsService _settings;
 
     private readonly NavigationService _navigation;
 
@@ -57,12 +60,14 @@ public partial class InvoicesViewModel : PageViewModel
         ConfirmationService confirmation,
         InvoiceEditorViewModel editor,
         PaymentsViewModel payments,
+        SettingsService settings,
         NavigationService navigation)
     {
         _store = store;
         _confirmation = confirmation;
         _editor = editor;
         _payments = payments;
+        _settings = settings;
         _navigation = navigation;
 
         _selectedStatus = StatusFilterOption.All();
@@ -196,6 +201,7 @@ public partial class InvoicesViewModel : PageViewModel
         }
         catch (Exception exception)
         {
+            Log.Error(exception, "Failed to mark invoice {Number} as sent", invoice.Number);
             StatusMessage = exception.Message;
         }
         finally
@@ -230,6 +236,7 @@ public partial class InvoicesViewModel : PageViewModel
         }
         catch (Exception exception)
         {
+            Log.Error(exception, "Failed to delete draft invoice {Number}", invoice.Number);
             StatusMessage = exception.Message;
         }
         finally
@@ -311,8 +318,13 @@ public partial class InvoicesViewModel : PageViewModel
                          ?? ClientOptions[0];
     }
 
-    private static string FormatMoney(decimal amount) =>
-        string.Create(CultureInfo.CurrentUICulture, $"€{amount:N0}");
+    /// <summary>
+    /// The summary can span invoices in different currencies, so it reports
+    /// under the company's own currency rather than any single invoice's.
+    /// </summary>
+    private string FormatMoney(decimal amount) => string.Create(
+        CultureInfo.CurrentUICulture,
+        $"{CultureText.CurrencySymbol(_settings.Current.Company.DefaultCurrency)}{amount:N0}");
 }
 
 /// <summary>One entry of the status filter; "All" is the entry with no status.</summary>

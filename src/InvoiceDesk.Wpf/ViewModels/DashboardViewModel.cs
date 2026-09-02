@@ -3,6 +3,7 @@ using System.Globalization;
 using InvoiceDesk.Domain.Abstractions;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
+using InvoiceDesk.Wpf.Services;
 
 namespace InvoiceDesk.Wpf.ViewModels;
 
@@ -14,14 +15,17 @@ public class DashboardViewModel : PageViewModel
 
     private readonly IInvoiceStore _invoiceStore;
 
+    private readonly SettingsService _settings;
+
     private IReadOnlyList<Client> _clients = [];
 
     private IReadOnlyList<Invoice> _invoices = [];
 
-    public DashboardViewModel(IClientStore clientStore, IInvoiceStore invoiceStore)
+    public DashboardViewModel(IClientStore clientStore, IInvoiceStore invoiceStore, SettingsService settings)
     {
         _clientStore = clientStore;
         _invoiceStore = invoiceStore;
+        _settings = settings;
     }
 
     public override string TitleKey => "Nav_Dashboard";
@@ -155,8 +159,14 @@ public class DashboardViewModel : PageViewModel
         }
     }
 
-    private static string FormatMoney(decimal amount) =>
-        string.Create(CultureInfo.CurrentUICulture, $"€{amount:N0}");
+    /// <summary>
+    /// Aggregates like the month's revenue can mix invoices in different
+    /// currencies, so this reports them under the company's own currency rather
+    /// than pretending the total belongs to any single invoice.
+    /// </summary>
+    private string FormatMoney(decimal amount) => string.Create(
+        CultureInfo.CurrentUICulture,
+        $"{CultureText.CurrencySymbol(_settings.Current.Company.DefaultCurrency)}{amount:N0}");
 }
 
 public class MonthlyRevenuePoint

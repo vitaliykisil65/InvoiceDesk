@@ -22,13 +22,9 @@ public class StorageService
 
     public string ReportsFolder => _settingsService.Current.ReportsFolder;
 
-    public string AttachmentsFolder => _settingsService.Current.AttachmentsFolder;
-
     public string BackupsFolder => _settingsService.Current.BackupsFolder;
 
     public static string DefaultReportsFolder => DefaultFolder("Reports");
-
-    public static string DefaultAttachmentsFolder => DefaultFolder("Attachments");
 
     public static string DefaultBackupsFolder => DefaultFolder("Backups");
 
@@ -38,11 +34,6 @@ public class StorageService
         if (string.IsNullOrWhiteSpace(settings.ReportsFolder))
         {
             settings.ReportsFolder = DefaultReportsFolder;
-        }
-
-        if (string.IsNullOrWhiteSpace(settings.AttachmentsFolder))
-        {
-            settings.AttachmentsFolder = DefaultAttachmentsFolder;
         }
 
         if (string.IsNullOrWhiteSpace(settings.BackupsFolder))
@@ -55,7 +46,7 @@ public class StorageService
 
     public void EnsureFolders(AppSettings settings)
     {
-        foreach (var folder in new[] { settings.ReportsFolder, settings.AttachmentsFolder, settings.BackupsFolder })
+        foreach (var folder in new[] { settings.ReportsFolder, settings.BackupsFolder })
         {
             TryCreate(folder);
         }
