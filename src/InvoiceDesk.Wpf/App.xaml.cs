@@ -69,10 +69,9 @@ public partial class App : Application
             _host.Services.GetRequiredService<LocalizationService>().Apply(settings.Language);
             _host.Services.GetRequiredService<ThemeService>().Apply(settings.Theme);
 
-            // The culture is settled by now, so the dashboard formats its money and
-            // month names correctly on the very first render.
-            await _host.Services.GetRequiredService<DashboardViewModel>().LoadAsync();
-
+            // The culture is settled by now, so the dashboard — which loads itself
+            // when the shell activates it — formats money and month names correctly
+            // on the very first render.
             _host.Services.GetRequiredService<ShellWindow>().Show();
 
             Log.Information("InvoiceDesk started");

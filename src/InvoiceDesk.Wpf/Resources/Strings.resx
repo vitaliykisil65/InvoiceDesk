@@ -53,9 +53,6 @@
   <data name="Shell_CompanyPlaceholder" xml:space="preserve">
     <value>Set up your company</value>
   </data>
-  <data name="Shell_BackupStatus" xml:space="preserve">
-    <value>Backup: today {0}</value>
-  </data>
   <data name="Shell_Minimize" xml:space="preserve">
     <value>Minimize</value>
   </data>
@@ -198,18 +195,6 @@
   </data>
   <data name="Settings_LanguageHint" xml:space="preserve">
     <value>Interface language</value>
-  </data>
-  <data name="Language_System" xml:space="preserve">
-    <value>System</value>
-  </data>
-  <data name="Language_English" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="Language_Ukrainian" xml:space="preserve">
-    <value>Ukrainian</value>
-  </data>
-  <data name="Settings_LanguageSystemHint" xml:space="preserve">
-    <value>Follows the Windows display language, English if it is not available.</value>
   </data>
   <data name="Settings_Storage" xml:space="preserve">
     <value>Storage</value>

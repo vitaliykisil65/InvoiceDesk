@@ -55,9 +55,6 @@
   <data name="Shell_CompanyPlaceholder" xml:space="preserve">
     <value>Налаштуйте компанію</value>
   </data>
-  <data name="Shell_BackupStatus" xml:space="preserve">
-    <value>Резервна копія: сьогодні {0}</value>
-  </data>
   <data name="Shell_Minimize" xml:space="preserve">
     <value>Згорнути</value>
   </data>
@@ -148,12 +145,6 @@
   </data>
   <data name="Settings_LanguageHint" xml:space="preserve">
     <value>Мова інтерфейсу</value>
-  </data>
-  <data name="Language_System" xml:space="preserve">
-    <value>Системна</value>
-  </data>
-  <data name="Settings_LanguageSystemHint" xml:space="preserve">
-    <value>Береться з мови Windows; якщо її немає — англійська.</value>
   </data>
   <data name="Settings_Storage" xml:space="preserve">
     <value>Сховище</value>

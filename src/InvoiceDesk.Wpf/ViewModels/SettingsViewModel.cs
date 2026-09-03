@@ -74,9 +74,13 @@ public partial class SettingsViewModel : PageViewModel
         }
     }
 
+    /// <summary>
+    /// Reads back what is actually on screen rather than what is stored: until
+    /// the user picks a language, the stored value is empty and Windows decides.
+    /// </summary>
     public LanguageOption SelectedLanguage
     {
-        get => LanguageOptions.FirstOrDefault(option => option.Code == _draft.Language)
+        get => LanguageOptions.FirstOrDefault(option => option.Code == _localizationService.Current)
                ?? LanguageOptions[0];
         set
         {
@@ -91,10 +95,6 @@ public partial class SettingsViewModel : PageViewModel
             OnPropertyChanged();
         }
     }
-
-    public string LanguageHint => _localizationService.Preference == LocalizationService.SystemLanguage
-        ? LocalizedStrings.Get("Settings_LanguageSystemHint")
-        : LocalizedStrings.Get("Settings_LanguageHint");
 
     public string ReportsFolderInfo
     {
@@ -166,7 +166,6 @@ public partial class SettingsViewModel : PageViewModel
     public override void OnLanguageChanged()
     {
         base.OnLanguageChanged();
-        OnPropertyChanged(nameof(LanguageHint));
         OnPropertyChanged(nameof(SelectedLanguage));
         StatusMessage = string.Empty;
     }

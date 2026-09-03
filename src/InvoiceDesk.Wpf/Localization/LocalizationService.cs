@@ -2,11 +2,8 @@ using System.Globalization;
 
 namespace InvoiceDesk.Wpf.Localization;
 
-/// <summary>
-/// A language choice offered in Settings. <see cref="LocalizationService.SystemLanguage"/>
-/// is a pseudo-code meaning "follow the machine locale".
-/// </summary>
-public record LanguageOption(string Code, string NameKey, string NativeName)
+/// <summary>A language choice offered in Settings, named in its own language.</summary>
+public record LanguageOption(string Code, string NativeName)
 {
     public override string ToString() => NativeName;
 }
@@ -16,35 +13,36 @@ public class LocalizationService
     /// <summary>English is the invariant fallback for every missing translation.</summary>
     public const string FallbackLanguage = "en";
 
-    /// <summary>Stored value that means "take the language from Windows".</summary>
-    public const string SystemLanguage = "system";
+    /// <summary>
+    /// The Windows display language, read before <see cref="Apply"/> can change
+    /// the culture of the process, and used until the user picks a language.
+    /// </summary>
+    private readonly string _systemLanguage;
+
+    public LocalizationService() => _systemLanguage = ResolveSystemLanguage();
 
     public IReadOnlyList<LanguageOption> AvailableLanguages { get; } =
     [
-        new LanguageOption(SystemLanguage, "Language_System", "System"),
-        new LanguageOption("en", "Language_English", "English"),
-        new LanguageOption("uk", "Language_Ukrainian", "Українська")
+        new LanguageOption("en", "English"),
+        new LanguageOption("uk", "Українська")
     ];
 
-    /// <summary>What the user picked, which may be <see cref="SystemLanguage"/>.</summary>
-    public string Preference { get; private set; } = SystemLanguage;
-
-    /// <summary>The language actually shown on screen.</summary>
-    public string Effective { get; private set; } = FallbackLanguage;
+    /// <summary>The language shown on screen; always one the app actually ships.</summary>
+    public string Current { get; private set; } = FallbackLanguage;
 
     public event EventHandler? LanguageChanged;
 
+    /// <summary>
+    /// Applies a stored language code. Anything the app does not ship — including
+    /// the empty value a fresh installation starts with — falls back to Windows.
+    /// </summary>
     public void Apply(string preference)
     {
-        if (AvailableLanguages.All(language => language.Code != preference))
-        {
-            preference = SystemLanguage;
-        }
+        Current = AvailableLanguages.Any(language => language.Code == preference)
+            ? preference
+            : _systemLanguage;
 
-        Preference = preference;
-        Effective = Resolve(preference);
-
-        var culture = new CultureInfo(Effective);
+        var culture = new CultureInfo(Current);
         CultureInfo.CurrentUICulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
 
@@ -55,14 +53,9 @@ public class LocalizationService
     }
 
     /// <summary>Maps the machine locale onto a language the app actually ships.</summary>
-    private string Resolve(string preference)
+    private string ResolveSystemLanguage()
     {
-        if (preference != SystemLanguage)
-        {
-            return preference;
-        }
-
-        var systemLanguage = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
+        var systemLanguage = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
         return AvailableLanguages.Any(language => language.Code == systemLanguage)
             ? systemLanguage

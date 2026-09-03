@@ -5,8 +5,8 @@ public class AppSettings
 {
     public ThemePreference Theme { get; set; } = ThemePreference.System;
 
-    /// <summary>Language code, or "system" to follow the machine locale.</summary>
-    public string Language { get; set; } = "system";
+    /// <summary>Language code; empty until the user picks one, and Windows decides meanwhile.</summary>
+    public string Language { get; set; } = string.Empty;
 
     public string ReportsFolder { get; set; } = string.Empty;
 

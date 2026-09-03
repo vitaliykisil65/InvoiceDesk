@@ -35,7 +35,8 @@ this file covers only what is specific to this product.
 - View models are mapped to views by `DataTemplate`, so navigation is a matter
   of setting a property.
 - The Domain project stays free of EF Core and WPF references. The WPF project
-  talks to data through `IInvoiceDataStore`, never through `DbContext`.
+  talks to data through the four store abstractions it declares — `IClientStore`,
+  `IProductStore`, `IInvoiceStore` and `IPaymentStore` — never through `DbContext`.
 - Settings are JSON under `%AppData%\InvoiceDesk\settings.json`; the database is
   `invoicedesk.db` in the same folder.
 

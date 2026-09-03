@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceDesk.Wpf.Localization;
@@ -13,6 +12,8 @@ public partial class ShellViewModel : ObservableObject
     private readonly ThemeService _themeService;
 
     private readonly SettingsService _settingsService;
+
+    private readonly InvoicesViewModel _invoices;
 
     private readonly InvoiceEditorViewModel _invoiceEditor;
 
@@ -51,6 +52,7 @@ public partial class ShellViewModel : ObservableObject
     {
         _themeService = themeService;
         _settingsService = settingsService;
+        _invoices = invoices;
         _invoiceEditor = invoiceEditor;
 
         Pages =
@@ -74,6 +76,10 @@ public partial class ShellViewModel : ObservableObject
 
         navigationService.PageRequested += (_, page) => Show(page);
         navigationService.BackRequested += (_, _) => Show(_returnTo ?? Pages[0]);
+
+        // The first page is assigned rather than navigated to, so it needs the
+        // same activation every later page gets from OnCurrentPageChanged.
+        ActivatePage(_currentPage);
     }
 
     public ObservableCollection<PageViewModel> Pages { get; }
@@ -90,11 +96,10 @@ public partial class ShellViewModel : ObservableObject
     /// <summary>Glyph for the theme switch: shows the theme the user would move to.</summary>
     public string ThemeGlyph => _themeService.Effective == AppTheme.Light ? "" : "";
 
-    public string BackupStatus => LocalizedStrings.Format(
-        "Shell_BackupStatus",
-        DateTime.Now.ToString("HH:mm", CultureInfo.CurrentUICulture));
-
     partial void OnCurrentPageChanged(PageViewModel value) => ActivatePage(value);
+
+    /// <summary>The header search box filters the invoice list as the user types.</summary>
+    partial void OnSearchTextChanged(string value) => _invoices.SearchText = value;
 
     partial void OnSelectedPageChanged(PageViewModel? value)
     {
@@ -146,6 +151,10 @@ public partial class ShellViewModel : ObservableObject
         }
     }
 
+    /// <summary>Enter in the search box shows the matches on the invoice list.</summary>
+    [RelayCommand]
+    private void SubmitSearch() => Show(_invoices);
+
     [RelayCommand]
     private void ToggleTheme() => _themeService.Toggle();
 
@@ -159,7 +168,6 @@ public partial class ShellViewModel : ObservableObject
         // The editor has no sidebar entry, and it may well be the page on screen.
         _invoiceEditor.OnLanguageChanged();
 
-        OnPropertyChanged(nameof(BackupStatus));
         OnPropertyChanged(nameof(CompanyName));
     }
 }

@@ -59,7 +59,7 @@ public class DashboardViewModel : PageViewModel
     }
 
     /// <summary>Reads the current data and rebuilds everything on the page.</summary>
-    public async Task LoadAsync(CancellationToken cancellationToken = default)
+    public override async Task OnActivatedAsync(CancellationToken cancellationToken = default)
     {
         _clients = await _clientStore.GetAsync(cancellationToken: cancellationToken);
         _invoices = await _invoiceStore.GetAsync(cancellationToken);

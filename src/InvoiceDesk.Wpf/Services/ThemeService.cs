@@ -19,7 +19,7 @@ public enum AppTheme
 }
 
 /// <summary>Swaps the colour dictionary that every brush in the app resolves against.</summary>
-public class ThemeService
+public class ThemeService : IDisposable
 {
     private const int ColorDictionaryIndex = 0;
     private const string PersonalizeKey = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
@@ -44,6 +44,16 @@ public class ThemeService
 
     /// <summary>Cycles light and dark from the title bar button; leaves System mode.</summary>
     public void Toggle() => Apply(Effective == AppTheme.Light ? ThemePreference.Dark : ThemePreference.Light);
+
+    /// <summary>
+    /// <see cref="SystemEvents"/> is static and keeps this service alive for as
+    /// long as the process, so the subscription is given back on shutdown.
+    /// </summary>
+    public void Dispose()
+    {
+        SystemEvents.UserPreferenceChanged -= OnUserPreferenceChanged;
+        GC.SuppressFinalize(this);
+    }
 
     private static AppTheme Resolve(ThemePreference preference) => preference switch
     {
