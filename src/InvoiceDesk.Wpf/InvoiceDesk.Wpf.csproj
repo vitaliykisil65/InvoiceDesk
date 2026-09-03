@@ -12,9 +12,9 @@
   <PropertyGroup>
     <Product>InvoiceDesk</Product>
     <AssemblyTitle>InvoiceDesk</AssemblyTitle>
-    <Company>Vitaliy Kisil</Company>
+    <Company>InvoiceDesk</Company>
     <Description>Invoicing for small businesses.</Description>
-    <Copyright>Copyright © 2026 Vitaliy Kisil</Copyright>
+    <Copyright>Copyright © 2026 InvoiceDesk</Copyright>
     <Version>1.0.0</Version>
   </PropertyGroup>
 

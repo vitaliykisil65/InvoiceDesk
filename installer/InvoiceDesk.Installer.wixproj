@@ -1,0 +1,30 @@
+<Project Sdk="WixToolset.Sdk/6.0.2">
+
+  <PropertyGroup>
+    <!-- One predictable place for the MSI, matching the .gitignore entry. -->
+    <OutputPath>$(MSBuildThisFileDirectory)Output\</OutputPath>
+    <ProductVersion>1.0.0</ProductVersion>
+    <OutputName>InvoiceDesk-$(ProductVersion)-x64</OutputName>
+    <OutputType>Package</OutputType>
+    <InstallerPlatform>x64</InstallerPlatform>
+    <!-- Where "dotnet publish -p:PublishProfile=win-x64" leaves the application. -->
+    <PublishDir>$(MSBuildThisFileDirectory)..\src\InvoiceDesk.Wpf\bin\publish\win-x64</PublishDir>
+    <DefineConstants>ProductVersion=$(ProductVersion);PublishDir=$(PublishDir)</DefineConstants>
+    <!--
+      ICE60 asks for a language on every versioned file. The Lato font files
+      QuestPDF ships are carried as plain application data, not registered as
+      system fonts, so there is no language to declare for them.
+    -->
+    <SuppressIces>ICE60</SuppressIces>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
+  </ItemGroup>
+
+  <Target Name="EnsureApplicationPublished" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(PublishDir)\InvoiceDesk.Wpf.exe')"
+           Text="The application has not been published yet. Run: dotnet publish src/InvoiceDesk.Wpf -p:PublishProfile=win-x64" />
+  </Target>
+
+</Project>
