@@ -15,9 +15,8 @@ this file covers only what is specific to this product.
   Windows app theme and reacts to changes at runtime). Every brush is a
   `DynamicResource`, so nothing needs a restart to re-skin.
 - **Storage.** File locations are configurable in Settings: where reports and
-  exported PDFs are saved, where backups are written, and where invoice
-  attachments live. Defaults sit under the user's Documents folder, never next
-  to the executable.
+  exported PDFs are saved, and where backups are written. Defaults sit under the
+  user's Documents folder, never next to the executable.
 - Both the theme and the language choice, and all storage paths, are persisted
   in user settings and restored on the next launch.
 
