@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -6,7 +6,21 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\InvoiceDesk.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <Product>InvoiceDesk</Product>
+    <AssemblyTitle>InvoiceDesk</AssemblyTitle>
+    <Company>Vitaliy Kisil</Company>
+    <Description>Invoicing for small businesses.</Description>
+    <Copyright>Copyright © 2026 Vitaliy Kisil</Copyright>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\InvoiceDesk.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />

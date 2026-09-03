@@ -9,6 +9,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="InvoiceDesk"
+        Icon="pack://application:,,,/Assets/InvoiceDesk.ico"
         Height="720" Width="1180" MinHeight="560" MinWidth="900"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource SurfacePageBrush}"
