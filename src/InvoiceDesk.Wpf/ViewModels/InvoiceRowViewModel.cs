@@ -1,4 +1,3 @@
-using System.Globalization;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
 
@@ -15,12 +14,12 @@ public class InvoiceRowViewModel
         Status = invoice.Status;
         IsDraft = invoice.Status == InvoiceStatus.Draft;
         StatusText = LocalizedStrings.Get(StatusKey(invoice.Status));
-        IssuedText = invoice.IssuedOn.ToString("dd MMM yyyy", CultureInfo.CurrentUICulture);
+        IssuedText = invoice.IssuedOn.ToString("dd MMM yyyy", AppCulture.Current);
 
         // A draft has not been sent, so it owes nothing and is due nowhere.
         DueText = IsDraft
             ? "—"
-            : invoice.DueOn.ToString("dd MMM", CultureInfo.CurrentUICulture);
+            : invoice.DueOn.ToString("dd MMM", AppCulture.Current);
         TotalText = CultureText.FormatMoney(invoice.GrandTotal, invoice.Currency);
         OutstandingText = invoice.OutstandingAmount > 0m
             ? CultureText.FormatMoney(invoice.OutstandingAmount, invoice.Currency)

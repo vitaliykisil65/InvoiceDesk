@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -217,7 +216,7 @@ public class MonthlyReportRowViewModel
 {
     public MonthlyReportRowViewModel(MonthlyRevenueRow row, string currency)
     {
-        MonthLabel = row.Month.ToString("MMMM yyyy", CultureInfo.CurrentUICulture);
+        MonthLabel = row.Month.ToString("MMMM yyyy", AppCulture.Current);
         InvoicedText = CultureText.FormatMoney(row.Invoiced, currency);
         PaidText = CultureText.FormatMoney(row.Paid, currency);
         OutstandingText = CultureText.FormatMoney(row.Outstanding, currency);

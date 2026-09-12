@@ -181,7 +181,7 @@
                         <ComboBox Height="34" Margin="0,0,0,12" FontSize="13"
                                   ItemsSource="{Binding InvoiceOptions}"
                                   SelectedItem="{Binding SelectedInvoiceOption, Mode=TwoWay}"
-                                  DisplayMemberPath="Label" />
+                                  ItemTemplate="{StaticResource LabelItemTemplate}" />
 
                         <TextBlock Style="{StaticResource FieldLabel}" Text="{Binding DateHint}" />
                         <TextBox Style="{StaticResource FieldBox}"

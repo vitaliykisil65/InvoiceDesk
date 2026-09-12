@@ -9,8 +9,6 @@ namespace InvoiceDesk.Wpf.ViewModels;
 
 public partial class ShellViewModel : ObservableObject
 {
-    private readonly ThemeService _themeService;
-
     private readonly SettingsService _settingsService;
 
     private readonly InvoicesViewModel _invoices;
@@ -45,12 +43,10 @@ public partial class ShellViewModel : ObservableObject
         ReportsViewModel reports,
         InvoiceEditorViewModel invoiceEditor,
         SettingsViewModel settings,
-        ThemeService themeService,
         SettingsService settingsService,
         LocalizationService localizationService,
         NavigationService navigationService)
     {
-        _themeService = themeService;
         _settingsService = settingsService;
         _invoices = invoices;
         _invoiceEditor = invoiceEditor;
@@ -71,7 +67,6 @@ public partial class ShellViewModel : ObservableObject
         _selectedPage = _currentPage;
 
         localizationService.LanguageChanged += (_, _) => OnLanguageChanged();
-        themeService.ThemeChanged += (_, _) => OnPropertyChanged(nameof(ThemeGlyph));
         settingsService.SettingsChanged += (_, _) => OnPropertyChanged(nameof(CompanyName));
 
         navigationService.PageRequested += (_, page) => Show(page);
@@ -92,9 +87,6 @@ public partial class ShellViewModel : ObservableObject
             return string.IsNullOrWhiteSpace(name) ? LocalizedStrings.Get("Shell_CompanyPlaceholder") : name;
         }
     }
-
-    /// <summary>Glyph for the theme switch: shows the theme the user would move to.</summary>
-    public string ThemeGlyph => _themeService.Effective == AppTheme.Light ? "" : "";
 
     partial void OnCurrentPageChanged(PageViewModel value) => ActivatePage(value);
 
@@ -154,9 +146,6 @@ public partial class ShellViewModel : ObservableObject
     /// <summary>Enter in the search box shows the matches on the invoice list.</summary>
     [RelayCommand]
     private void SubmitSearch() => Show(_invoices);
-
-    [RelayCommand]
-    private void ToggleTheme() => _themeService.Toggle();
 
     private void OnLanguageChanged()
     {

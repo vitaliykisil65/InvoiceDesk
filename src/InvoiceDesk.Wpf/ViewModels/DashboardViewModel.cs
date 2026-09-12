@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Globalization;
 using InvoiceDesk.Domain.Abstractions;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
@@ -88,10 +87,10 @@ public class DashboardViewModel : PageViewModel
         RevenueThisMonth = FormatMoney(paidThisMonth);
         OutstandingTotal = FormatMoney(outstanding);
         OverdueTotal = FormatMoney(overdue);
-        ClientCount = _clients.Count.ToString(CultureInfo.CurrentUICulture);
+        ClientCount = _clients.Count.ToString(AppCulture.Current);
         CurrentMonthLabel = LocalizedStrings.Format(
             "Dashboard_RevenueForMonth",
-            monthStart.ToString("MMMM", CultureInfo.CurrentUICulture));
+            monthStart.ToString("MMMM", AppCulture.Current));
         DataSummary = LocalizedStrings.Format(
             "Dashboard_Summary",
             _clients.Count,
@@ -130,7 +129,7 @@ public class DashboardViewModel : PageViewModel
 
             buckets.Add(new MonthlyRevenuePoint
             {
-                Label = start.ToString("MMM", CultureInfo.CurrentUICulture),
+                Label = start.ToString("MMM", AppCulture.Current),
                 Amount = amount,
                 IsCurrent = monthsBack == 0
             });
@@ -165,7 +164,7 @@ public class DashboardViewModel : PageViewModel
     /// than pretending the total belongs to any single invoice.
     /// </summary>
     private string FormatMoney(decimal amount) => string.Create(
-        CultureInfo.CurrentUICulture,
+        AppCulture.Current,
         $"{CultureText.CurrencySymbol(_settings.Current.Company.DefaultCurrency)}{amount:N0}");
 }
 

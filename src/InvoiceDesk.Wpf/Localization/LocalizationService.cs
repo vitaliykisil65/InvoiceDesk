@@ -42,12 +42,10 @@ public class LocalizationService
             ? preference
             : _systemLanguage;
 
-        var culture = new CultureInfo(Current);
-        CultureInfo.CurrentUICulture = culture;
-        CultureInfo.DefaultThreadCurrentUICulture = culture;
+        AppCulture.Set(new CultureInfo(Current));
 
-        // View models format dates and numbers against CurrentUICulture, so this
-        // notification is enough to refresh everything on screen.
+        // View models format dates and numbers against the application culture,
+        // so this notification is enough to refresh everything on screen.
         LocalizedStrings.Instance.RaiseAllChanged();
         LanguageChanged?.Invoke(this, EventArgs.Empty);
     }

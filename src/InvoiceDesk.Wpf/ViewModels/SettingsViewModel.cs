@@ -1,4 +1,3 @@
-using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceDesk.Wpf.Localization;
@@ -102,7 +101,7 @@ public partial class SettingsViewModel : PageViewModel
         {
             var (fileCount, totalBytes) = _storageService.Describe(ReportsFolder);
             return string.Create(
-                CultureInfo.CurrentUICulture,
+                AppCulture.Current,
                 $"{fileCount} files, {totalBytes / 1024d / 1024d:N1} MB");
         }
     }
@@ -148,7 +147,7 @@ public partial class SettingsViewModel : PageViewModel
 
         StatusMessage = LocalizedStrings.Format(
             "Settings_SavedAt",
-            DateTime.Now.ToString("HH:mm", CultureInfo.CurrentUICulture));
+            DateTime.Now.ToString("HH:mm", AppCulture.Current));
 
         OnPropertyChanged(nameof(ReportsFolderInfo));
     }

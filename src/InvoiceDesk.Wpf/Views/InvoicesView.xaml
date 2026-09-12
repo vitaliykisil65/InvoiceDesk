@@ -49,43 +49,47 @@
     <Border Style="{StaticResource CardBorder}" Padding="0">
         <DockPanel>
 
-            <!-- Filters -->
-            <Grid DockPanel.Dock="Top" Margin="14,14,14,10">
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Width="220" Style="{StaticResource SearchBox}"
-                             Tag="{loc:Text Invoices_SearchPlaceholder}"
-                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                    <ComboBox Width="150" Height="32" Margin="8,0,0,0" FontSize="13"
-                              ItemsSource="{Binding StatusOptions}"
-                              SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"
-                              DisplayMemberPath="Label" />
-                    <ComboBox Width="180" Height="32" Margin="8,0,0,0" FontSize="13"
-                              ItemsSource="{Binding ClientOptions}"
-                              SelectedItem="{Binding SelectedClient, Mode=TwoWay}"
-                              DisplayMemberPath="Label" />
-                </StackPanel>
+            <!--
+                Filters and actions each get their own row. Six action buttons
+                and three filters never fit side by side once the labels are
+                translated, and a narrow window used to draw them on top of one
+                another; the panels wrap instead of overlapping.
+            -->
+            <WrapPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="14,14,14,2">
+                <TextBox Width="220" Margin="0,0,8,8" Style="{StaticResource SearchBox}"
+                         Tag="{loc:Text Invoices_SearchPlaceholder}"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox Width="150" Height="32" Margin="0,0,8,8" FontSize="13"
+                          ItemsSource="{Binding StatusOptions}"
+                          SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"
+                          ItemTemplate="{StaticResource LabelItemTemplate}" />
+                <ComboBox Width="180" Height="32" Margin="0,0,8,8" FontSize="13"
+                          ItemsSource="{Binding ClientOptions}"
+                          SelectedItem="{Binding SelectedClient, Mode=TwoWay}"
+                          ItemTemplate="{StaticResource LabelItemTemplate}" />
+            </WrapPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
-                            Command="{Binding OpenInvoiceCommand}"
-                            Content="{loc:Text Invoices_Open}" />
-                    <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
-                            Command="{Binding MarkAsSentCommand}"
-                            Content="{loc:Text Invoices_MarkAsSent}" />
-                    <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
-                            Command="{Binding RecordPaymentCommand}"
-                            Content="{loc:Text Invoices_RecordPayment}" />
-                    <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
-                            Command="{Binding ExportPdfCommand}"
-                            Content="{loc:Text Invoices_ExportPdf}" />
-                    <Button Style="{StaticResource SubtleButton}" Margin="0,0,8,0"
-                            Command="{Binding DeleteDraftCommand}"
-                            Content="{loc:Text Invoices_DeleteDraft}" />
-                    <Button Style="{StaticResource PrimaryButton}"
-                            Command="{Binding NewInvoiceCommand}"
-                            Content="{loc:Text Invoices_New}" />
-                </StackPanel>
-            </Grid>
+            <WrapPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right"
+                       Margin="14,0,14,2">
+                <Button Style="{StaticResource SubtleButton}" Margin="8,0,0,8"
+                        Command="{Binding OpenInvoiceCommand}"
+                        Content="{loc:Text Invoices_Open}" />
+                <Button Style="{StaticResource SubtleButton}" Margin="8,0,0,8"
+                        Command="{Binding MarkAsSentCommand}"
+                        Content="{loc:Text Invoices_MarkAsSent}" />
+                <Button Style="{StaticResource SubtleButton}" Margin="8,0,0,8"
+                        Command="{Binding RecordPaymentCommand}"
+                        Content="{loc:Text Invoices_RecordPayment}" />
+                <Button Style="{StaticResource SubtleButton}" Margin="8,0,0,8"
+                        Command="{Binding ExportPdfCommand}"
+                        Content="{loc:Text Invoices_ExportPdf}" />
+                <Button Style="{StaticResource SubtleButton}" Margin="8,0,0,8"
+                        Command="{Binding DeleteDraftCommand}"
+                        Content="{loc:Text Invoices_DeleteDraft}" />
+                <Button Style="{StaticResource PrimaryButton}" Margin="8,0,0,8"
+                        Command="{Binding NewInvoiceCommand}"
+                        Content="{loc:Text Invoices_New}" />
+            </WrapPanel>
 
             <!-- Summary and messages -->
             <Border DockPanel.Dock="Bottom" BorderBrush="{DynamicResource BorderSubtleBrush}"

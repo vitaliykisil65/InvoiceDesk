@@ -138,7 +138,7 @@
                             <ComboBox Height="32" Margin="0,0,0,12"
                                       ItemsSource="{Binding Clients}"
                                       SelectedItem="{Binding SelectedClient}"
-                                      DisplayMemberPath="Name" />
+                                      ItemTemplate="{StaticResource NameItemTemplate}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="0" Grid.Column="2">
@@ -260,7 +260,7 @@
                             <ComboBox Width="220" Height="32" Margin="0,0,8,0"
                                       ItemsSource="{Binding Products}"
                                       SelectedItem="{Binding SelectedProduct}"
-                                      DisplayMemberPath="Name" />
+                                      ItemTemplate="{StaticResource NameItemTemplate}" />
                             <Button Style="{StaticResource SubtleButton}"
                                     Command="{Binding AddFromPriceListCommand}"
                                     Content="{loc:Text InvoiceEditor_AddFromPriceList}" />

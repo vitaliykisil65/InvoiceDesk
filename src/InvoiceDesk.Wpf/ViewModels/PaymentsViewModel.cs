@@ -75,7 +75,7 @@ public partial class PaymentsViewModel : PageViewModel
 
     public override string TitleKey => "Nav_Payments";
 
-    public override string Icon => "";
+    public override string Icon => "";
 
     public ObservableCollection<PaymentRowViewModel> Payments { get; } = [];
 

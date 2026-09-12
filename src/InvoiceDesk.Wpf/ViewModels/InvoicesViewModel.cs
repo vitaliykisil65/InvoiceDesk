@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceDesk.Domain.Abstractions;
@@ -83,7 +82,7 @@ public partial class InvoicesViewModel : PageViewModel
 
     public override string TitleKey => "Nav_Invoices";
 
-    public override string Icon => "";
+    public override string Icon => "";
 
     public ObservableCollection<InvoiceRowViewModel> Invoices { get; } = [];
 
@@ -354,7 +353,7 @@ public partial class InvoicesViewModel : PageViewModel
     /// under the company's own currency rather than any single invoice's.
     /// </summary>
     private string FormatMoney(decimal amount) => string.Create(
-        CultureInfo.CurrentUICulture,
+        AppCulture.Current,
         $"{CultureText.CurrencySymbol(_settings.Current.Company.DefaultCurrency)}{amount:N0}");
 }
 

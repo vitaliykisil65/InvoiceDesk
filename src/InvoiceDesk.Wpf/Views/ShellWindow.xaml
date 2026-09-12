@@ -92,7 +92,6 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <TextBox Grid.Column="0" Style="{StaticResource SearchBox}" MaxWidth="420"
@@ -104,13 +103,10 @@
                             </TextBox.InputBindings>
                         </TextBox>
 
-                        <Button Grid.Column="1" Style="{StaticResource PrimaryButton}" Margin="10,0,8,0"
+                        <!-- The theme is chosen in Settings; the header stays out of it -->
+                        <Button Grid.Column="1" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0"
                                 Command="{Binding NewInvoiceCommand}"
                                 Content="{loc:Text Shell_NewInvoice}" />
-
-                        <Button Grid.Column="2" Style="{StaticResource IconButton}"
-                                Command="{Binding ToggleThemeCommand}"
-                                Content="{Binding ThemeGlyph}" ToolTip="{loc:Text Shell_SwitchTheme}" />
                     </Grid>
 
                     <!-- A page that failed to load says so here, once, for every page -->

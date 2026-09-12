@@ -1,4 +1,3 @@
-using System.Globalization;
 using InvoiceDesk.Domain.Entities;
 using InvoiceDesk.Wpf.Localization;
 
@@ -13,7 +12,7 @@ public class ProductListItemViewModel
         Name = product.Name;
         IsArchived = product.IsArchived;
 
-        PriceText = string.Create(CultureInfo.CurrentUICulture, $"{product.UnitPrice:N2}");
+        PriceText = string.Create(AppCulture.Current, $"{product.UnitPrice:N2}");
 
         // "19.00" reads as noise next to a unit, so trailing zeros are dropped.
         Subtitle = product.IsArchived
@@ -21,7 +20,7 @@ public class ProductListItemViewModel
             : LocalizedStrings.Format(
                 "Products_Subtitle",
                 product.Unit,
-                product.TaxRate.ToString("0.##", CultureInfo.CurrentUICulture));
+                product.TaxRate.ToString("0.##", AppCulture.Current));
     }
 
     public int Id { get; }

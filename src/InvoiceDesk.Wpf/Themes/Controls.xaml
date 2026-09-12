@@ -128,6 +128,8 @@
         <Setter Property="Margin" Value="8,1" />
         <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
         <Setter Property="Cursor" Value="Hand" />
+        <!-- Without this a screen reader announces the view model's type name -->
+        <Setter Property="AutomationProperties.Name" Value="{Binding Title}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -222,6 +224,20 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--
+        The closed part of the combo box below draws SelectionBoxItem, which
+        WPF fills in from ItemTemplate and not from DisplayMemberPath: a combo
+        that only sets DisplayMemberPath ends up showing the type name of the
+        selected item. These are the item templates the combo boxes use instead.
+    -->
+    <DataTemplate x:Key="LabelItemTemplate">
+        <TextBlock Text="{Binding Label}" TextTrimming="CharacterEllipsis" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="NameItemTemplate">
+        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+    </DataTemplate>
 
     <Style TargetType="ComboBox">
         <Setter Property="Height" Value="30" />

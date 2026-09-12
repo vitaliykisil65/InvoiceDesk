@@ -46,9 +46,6 @@
   <data name="Shell_NewInvoice" xml:space="preserve">
     <value>Новий рахунок</value>
   </data>
-  <data name="Shell_SwitchTheme" xml:space="preserve">
-    <value>Змінити тему</value>
-  </data>
   <data name="Shell_LocalDatabase" xml:space="preserve">
     <value>Локальна база даних</value>
   </data>

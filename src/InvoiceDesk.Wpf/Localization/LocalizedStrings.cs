@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
@@ -25,13 +24,13 @@ public sealed class LocalizedStrings : INotifyPropertyChanged
 
     /// <summary>Looks up a key in the current UI culture, falling back to English.</summary>
     public string this[string key] =>
-        Resources.GetString(key, CultureInfo.CurrentUICulture) ?? key;
+        Resources.GetString(key, AppCulture.Current) ?? key;
 
     public static string Get(string key) => Instance[key];
 
     /// <summary>Formats a localized string that contains placeholders.</summary>
     public static string Format(string key, params object[] arguments) =>
-        string.Format(CultureInfo.CurrentUICulture, Instance[key], arguments);
+        string.Format(AppCulture.Current, Instance[key], arguments);
 
     internal void RaiseAllChanged() =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));

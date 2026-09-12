@@ -1,4 +1,3 @@
-using System.Globalization;
 using InvoiceDesk.Domain.Reporting;
 using InvoiceDesk.Wpf.Localization;
 using InvoiceDesk.Wpf.Services;
@@ -126,7 +125,7 @@ public class ReportDocument : IDocument
 
                 foreach (var row in _report.MonthlyRows)
                 {
-                    table.Cell().Element(BodyCell).Text(row.Month.ToString("MMMM yyyy", CultureInfo.CurrentUICulture));
+                    table.Cell().Element(BodyCell).Text(row.Month.ToString("MMMM yyyy", AppCulture.Current));
                     table.Cell().Element(BodyCell).AlignRight().Text(CultureText.FormatMoney(row.Invoiced, _company.DefaultCurrency));
                     table.Cell().Element(BodyCell).AlignRight().Text(CultureText.FormatMoney(row.Paid, _company.DefaultCurrency));
                     table.Cell().Element(BodyCell).AlignRight().Text(CultureText.FormatMoney(row.Outstanding, _company.DefaultCurrency));

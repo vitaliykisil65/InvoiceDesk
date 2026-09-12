@@ -42,9 +42,6 @@ public class ThemeService : IDisposable
         ApplyEffective(Resolve(preference));
     }
 
-    /// <summary>Cycles light and dark from the title bar button; leaves System mode.</summary>
-    public void Toggle() => Apply(Effective == AppTheme.Light ? ThemePreference.Dark : ThemePreference.Light);
-
     /// <summary>
     /// <see cref="SystemEvents"/> is static and keeps this service alive for as
     /// long as the process, so the subscription is given back on shutdown.

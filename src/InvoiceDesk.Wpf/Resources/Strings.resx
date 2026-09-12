@@ -44,9 +44,6 @@
   <data name="Shell_NewInvoice" xml:space="preserve">
     <value>New invoice</value>
   </data>
-  <data name="Shell_SwitchTheme" xml:space="preserve">
-    <value>Switch theme</value>
-  </data>
   <data name="Shell_LocalDatabase" xml:space="preserve">
     <value>Local database</value>
   </data>
